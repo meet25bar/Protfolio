@@ -1,28 +1,6 @@
 import { useEffect, useRef } from 'react'
 
-/**
- * InteractiveNoiseGrid
- * Ported from the Framer component by the same name — zero Framer dependency.
- *
- * A canvas-based animated grid of shapes with:
- *  - Perlin-like noise distortion on every grid point
- *  - Smooth mouse-repulsion (dots scatter away from the cursor)
- *
- * The background of the canvas is transparent so it composites cleanly
- * over your app's own background colour.
- *
- * Props
- * ─────
- *  dotSize        {number}  dot radius in px          default 1.5
- *  gridSpacing    {number}  px between grid centres   default 34
- *  noiseIntensity {number}  0–50 displacement px      default 8
- *  animationSpeed {number}  time multiplier           default 1.2
- *  mouseRadius    {number}  repulsion radius px       default 160
- *  dotColor       {string}  CSS colour                default 'rgba(0,212,255,0.22)'
- *  shapeType      {string}  'dot'|'plus'|'line'|'square'|'diamond'|'cross'|'star'
- *  className      {string}  extra wrapper class
- *  style          {object}  extra wrapper style
- */
+
 export default function InteractiveNoiseGrid({
   dotSize        = 1.5,
   gridSpacing    = 34,
