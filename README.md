@@ -208,12 +208,7 @@ Online pet training platform providing structured learning paths, progress track
 
 ## 📈 Future Enhancements
 
-* Dark/Light Theme Toggle
-* Blog Integration
-* AI Chat Assistant
-* Interactive Project Analytics
-* Visitor Tracking Dashboard
-* Downloadable Resume
+* Photo Enhancement
 * Project Filtering System
 
 ---
