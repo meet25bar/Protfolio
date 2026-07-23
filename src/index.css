@@ -1,0 +1,422 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ══════════════════════════════════════════════════════════════
+   CSS CUSTOM PROPERTIES — Theme tokens
+   Dark is the default; html.light overrides each token.
+══════════════════════════════════════════════════════════════ */
+:root {
+  /* ── Dark mode backgrounds ── */
+  --bg-primary:   15 17 23;        /* #0F1117 — deep warm navy */
+  --bg-secondary: 22 26 35;        /* #161A23 — slightly lifted */
+  --bg-card:      28 33 45;        /* #1C212D — card surface */
+
+  /* ── Dark mode text ── */
+  --text-primary:   242 244 248;   /* #F2F4F8 — near white, warm */
+  --text-secondary: 156 163 180;   /* #9CA3B4 — muted slate */
+  --text-muted:     90  99  120;   /* #5A6378 — very muted */
+
+  /* ── Accents (softer, more premium) ── */
+  --accent-cyan:    99  179 237;   /* #63B3ED — sky blue */
+  --accent-violet:  167 139 250;   /* #A78BFA — soft violet */
+  --accent-emerald: 52  211 153;   /* #34D399 — mint */
+
+  /* ── Surfaces ── */
+  --surface:        rgba(255,255,255,0.04);
+  --surface-hover:  rgba(255,255,255,0.07);
+  --surface-border: rgba(255,255,255,0.08);
+
+  /* ── Glass card ── */
+  --glass-bg:       rgba(22,26,35,0.7);
+  --glass-border:   rgba(255,255,255,0.08);
+
+  /* ── Scrollbar ── */
+  --scroll-track:   #161A23;
+  --scroll-thumb:   rgba(99,179,237,0.3);
+
+  /* ── Theme transition ── */
+  --theme-transition: 0.4s;
+
+  /* ── Hero contact button ── */
+  --border-hero-contact: rgba(255,255,255,0.15);
+  --text-hero-contact:   rgb(242,244,248);
+}
+
+/* ── LIGHT MODE OVERRIDES — high contrast for readability ── */
+html.light {
+  --bg-primary:   244 246 250;     /* #F4F6FA — soft cool gray */
+  --bg-secondary: 232 236 243;     /* #E8ECF3 — clearer section lift */
+  --bg-card:      255 255 255;     /* #FFFFFF — pure white card */
+
+  --text-primary:   10  15  30;    /* #0A0F1E — near-black, strong */
+  --text-secondary: 45  55  72;    /* #2D3748 — dark slate (was too light) */
+  --text-muted:     90  100 116;   /* #5A6474 — readable muted (was grey-400) */
+
+  --accent-cyan:    3   105 161;   /* #0369A1 — deeper sky for AA contrast */
+  --accent-violet:  91  33  182;   /* #5B21B6 — deeper violet */
+  --accent-emerald: 4   120  87;   /* #047857 — deeper green */
+
+  --surface:        rgba(0,0,0,0.045);
+  --surface-hover:  rgba(0,0,0,0.08);
+  --surface-border: rgba(15,23,42,0.16);
+
+  --glass-bg:       rgba(255,255,255,0.92);
+  --glass-border:   rgba(15,23,42,0.14);
+
+  --scroll-track:   #e2e8f0;
+  --scroll-thumb:   rgba(3,105,161,0.45);
+
+  /* ── Hero contact button ── */
+  --border-hero-contact: rgba(10,15,30,0.45);
+  --text-hero-contact:   rgb(10,15,30);
+}
+
+/* Light mode: force stronger borders/text on glass surfaces */
+html.light .glass-card {
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.06),
+    0 8px 24px rgba(15, 23, 42, 0.08);
+  border-color: rgba(15, 23, 42, 0.14);
+}
+
+html.light .glass-card-hover:hover {
+  border-color: rgba(var(--accent-cyan), 0.45);
+  box-shadow:
+    0 12px 28px rgba(15, 23, 42, 0.12),
+    0 0 0 1px rgba(var(--accent-cyan), 0.12);
+}
+
+html.light ::selection {
+  background: rgba(var(--accent-cyan), 0.22);
+  color: rgb(var(--text-primary));
+}
+
+html.light .skill-pill {
+  color: rgb(var(--text-secondary));
+  border-color: rgba(15, 23, 42, 0.14);
+  background: rgba(15, 23, 42, 0.04);
+}
+
+html.light .noise-overlay {
+  opacity: 0.012;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BASE RESET & SMOOTH SCROLL
+══════════════════════════════════════════════════════════════ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Desktop rem base — tuned ~5% larger than prior 93.75% scale */
+@media (min-width: 1024px) and (max-width: 1919px) {
+  html {
+    font-size: 98.44%; /* ≈15.75px if browser default is 16px */
+  }
+}
+
+body {
+  font-family: 'Manrope', sans-serif;
+  background-color: rgb(var(--bg-primary));
+  color: rgb(var(--text-primary));
+  overflow-x: hidden;
+  transition:
+    background-color var(--theme-transition) ease,
+    color            var(--theme-transition) ease;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ── CUSTOM SCROLLBAR ─────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--scroll-track); }
+::-webkit-scrollbar-thumb {
+  background: var(--scroll-thumb);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(var(--accent-cyan), 0.55);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   UTILITY CLASSES
+══════════════════════════════════════════════════════════════ */
+.section-container {
+  @apply max-w-5xl xl:max-w-6xl mx-auto px-6 lg:px-8;
+}
+
+.section {
+  @apply py-16 md:py-20 lg:py-24 pb-32;
+  padding-bottom: calc(7.5rem + env(safe-area-inset-bottom, 0px));
+  min-height: 100vh;
+}
+
+/* ── GRADIENT TEXT ────────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(
+    135deg,
+    rgb(var(--accent-cyan))    0%,
+    rgb(var(--accent-violet))  55%,
+    rgb(var(--accent-emerald)) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-cyan {
+  background: linear-gradient(
+    90deg,
+    rgb(var(--accent-cyan)),
+    rgb(var(--accent-emerald))
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── GLASS CARD ───────────────────────────────────────────── */
+.glass-card {
+  background:          var(--glass-bg);
+  backdrop-filter:     blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid    var(--glass-border);
+  border-radius:       16px;
+  transition:
+    background    var(--theme-transition) ease,
+    border-color  var(--theme-transition) ease,
+    box-shadow    0.3s ease;
+}
+
+html.light .glass-card {
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.06),
+    0 8px 24px rgba(15, 23, 42, 0.08);
+  border-color: rgba(15, 23, 42, 0.14);
+}
+
+.glass-card-hover {
+  transition: all 0.3s ease;
+}
+
+.glass-card-hover:hover {
+  border-color: rgba(var(--accent-cyan), 0.25);
+  transform: translateY(-3px);
+  box-shadow:
+    0 16px 48px rgba(0,0,0,0.18),
+    0 0 24px rgba(var(--accent-cyan), 0.07);
+}
+
+html.light .glass-card-hover:hover {
+  border-color: rgba(var(--accent-cyan), 0.45);
+  box-shadow:
+    0 12px 28px rgba(15, 23, 42, 0.12),
+    0 0 0 1px rgba(var(--accent-cyan), 0.12);
+}
+
+/* ── NOISE OVERLAY ────────────────────────────────────────── */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.022;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px;
+  transition: opacity var(--theme-transition) ease;
+}
+
+html.light .noise-overlay {
+  opacity: 0.010;
+}
+
+/* ── GLOW DOT ─────────────────────────────────────────────── */
+.glow-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgb(var(--accent-cyan));
+  box-shadow:
+    0 0 6px  rgb(var(--accent-cyan)),
+    0 0 16px rgba(var(--accent-cyan), 0.5);
+}
+
+/* ── SELECTION ────────────────────────────────────────────── */
+::selection {
+  background: rgba(var(--accent-cyan), 0.18);
+  color: rgb(var(--accent-cyan));
+}
+
+/* ── GRADIENT BORDER ──────────────────────────────────────── */
+.gradient-border {
+  position: relative;
+}
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(var(--accent-cyan), 0.5),
+    rgba(var(--accent-violet), 0.4),
+    rgba(var(--accent-emerald), 0.4)
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ── TYPING CURSOR ────────────────────────────────────────── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0; }
+}
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+  color: rgb(var(--accent-cyan));
+}
+
+/* ── GRID BACKGROUND ──────────────────────────────────────── */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(var(--accent-cyan), 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--accent-cyan), 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  transition: background-image var(--theme-transition) ease;
+}
+
+/* ── FADE-IN ANIMATION ────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+/* ── ORB BLOB ─────────────────────────────────────────────── */
+@keyframes orbMove {
+  0%   { transform: translate(0,0)       scale(1);    }
+  33%  { transform: translate(60px,-40px) scale(1.08); }
+  66%  { transform: translate(-40px,30px) scale(0.95); }
+  100% { transform: translate(0,0)       scale(1);    }
+}
+.orb {
+  animation:    orbMove 14s ease-in-out infinite;
+  filter:       blur(90px);
+  border-radius:50%;
+  position:     absolute;
+  pointer-events: none;
+  transition:   opacity var(--theme-transition) ease;
+}
+
+html.light .orb {
+  opacity: 0.28 !important;
+  filter: blur(110px);
+}
+
+/* ── DOCK TOOLTIP ─────────────────────────────────────────── */
+.dock-tooltip {
+  position: absolute;
+  bottom: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+/* ── THEME RIPPLE OVERLAY ─────────────────────────────────── */
+.theme-ripple {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* ── FORM INPUTS (theme-aware) ────────────────────────────── */
+input, textarea {
+  background: var(--surface);
+  color: rgb(var(--text-primary));
+  border-color: var(--surface-border);
+  transition:
+    background    var(--theme-transition) ease,
+    color         var(--theme-transition) ease,
+    border-color  var(--theme-transition) ease;
+}
+
+html.light input,
+html.light textarea {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(15, 23, 42, 0.18);
+  color: rgb(var(--text-primary));
+}
+
+html.light input::placeholder,
+html.light textarea::placeholder {
+  color: rgb(var(--text-muted));
+  opacity: 1;
+}
+
+html.light input:focus,
+html.light textarea:focus {
+  border-color: rgb(var(--accent-cyan) / 0.55);
+  background: #ffffff;
+}
+
+/* ── SKILL PILL ───────────────────────────────────────────── */
+.skill-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 500;
+  border: 1px solid var(--surface-border);
+  background: var(--surface);
+  color: rgb(var(--text-secondary));
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+}
+.skill-pill:hover {
+  border-color: rgba(var(--accent-cyan), 0.3);
+  color: rgb(var(--accent-cyan));
+  background: rgba(var(--accent-cyan), 0.06);
+}
+.skill-pill-active {
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(var(--accent-cyan), 0.15);
+}
+
+/* ── CRT GRAIN ANIMATION ──────────────────────────────────── */
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -10%); }
+  20% { transform: translate(-15%, 5%); }
+  30% { transform: translate(7%, -25%); }
+  40% { transform: translate(-5%, 25%); }
+  50% { transform: translate(-15%, 10%); }
+  60% { transform: translate(15%, 0%); }
+  70% { transform: translate(0%, 15%); }
+  80% { transform: translate(3%, 35%); }
+  90% { transform: translate(-10%, 10%); }
+}
+
+.animate-grain {
+  animation: grain 0.4s steps(10) infinite;
+}
