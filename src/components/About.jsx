@@ -34,21 +34,21 @@ const MILESTONES = [
     icon: GraduationCap,
     year: '2023 – 2027',
     title: 'B.Tech in Computer Science',
-    desc: 'Pursuing CSE at Dr. Kiran & Pallavi Patel Global University with a CGPA of 9.15. Focusing on algorithms, machine learning, and data structures.',
+    desc: 'Pursuing CSE at Dr. Kiran & Pallavi Patel Global University with a CGPA of 9.17. Focusing on algorithms, machine learning, and data structures.',
     color: 'rgb(99,179,237)',
   },
   {
-    icon: ShoppingBag,
-    year: '2023',
-    title: 'Freelance Shopify Operations',
-    desc: 'Designed dropshipping platforms, managed UI, product listings, and customer conversion analytics.',
+    icon: Brain,
+    year: '2026 – Present',
+    title: 'SpectoV — Gen AI Trainee',
+    desc: 'Developing Generative AI solutions for AR/VR applications using Python and LLMs. Integrating intelligent workflows for immersive experiences.',
     color: 'rgb(167,139,250)',
   },
   {
     icon: Briefcase,
     year: '2026',
     title: 'Prodigy InfoTech — ML Intern',
-    desc: 'Trained and evaluated predictive ML models, processed large datasets, and implemented LLM/RAG workflows.',
+    desc: 'Developed and evaluated machine learning models on real-world datasets, engineered preprocessing workflows, and designed LLM/RAG concepts.',
     color: 'rgb(52,211,153)',
   },
 ]
@@ -56,28 +56,28 @@ const MILESTONES = [
 // ─── Stats ─────────────────────────────────────────────────────
 const STATS = [
   { value: '9.17', label: 'CGPA'        },
-  { value: '250+', label: 'LeetCode'    },
+  { value: '290+', label: 'LeetCode'    },
   { value: '3',    label: 'Projects'    },
-  { value: '3',    label: 'Experiences' },
+  { value: '4',    label: 'Experiences' },
 ]
 
 // ─── Social Links ──────────────────────────────────────────────
 const SOCIALS = [
   { icon: Instagram, label: 'Instagram', url: 'https://www.instagram.com/meet.barot25', color: '#E1306C' },
-  { icon: Linkedin,  label: 'LinkedIn',  url: 'https://www.linkedin.com/in/meet-barot-7b03862bb/', color: '#0A66C2' },
+  { icon: Linkedin,  label: 'LinkedIn',  url: 'https://www.linkedin.com/in/meetbarot', color: '#0A66C2' },
   { icon: Github,    label: 'GitHub',    url: 'https://github.com/meet25bar', color: '#fff' },
   { icon: XIcon,     label: 'X',         url: 'https://x.com/BarotMeet23562', color: '#fff' },
 ]
 
 // ─── LeetCode Stats ────────────────────────────────────────────
 const LEETCODE_STATS = {
-  solved: 250,
-  total: 3962,
-  easy: { solved: 120, total: 950 },
-  medium: { solved: 116, total: 2069 },
-  hard: { solved: 14, total: 943 },
-  submissions: 367,
-  activeDays: 234,
+  solved: 296,
+  total: 4029,
+  easy: { solved: 142, total: 960 },
+  medium: { solved: 139, total: 2103 },
+  hard: { solved: 15, total: 966 },
+  submissions: 444,
+  activeDays: 283,
   maxStreak: 48,
 }
 
@@ -744,7 +744,7 @@ export default function About() {
               <div className="flex flex-col gap-2 text-sm text-text-secondary font-manrope">
                 <div className="flex items-center gap-2">
                   <MapPin size={14} style={{ color: 'rgb(99,179,237)' }} />
-                  <span>Varnama, Gujarat, India</span>
+                  <span>Vadodara, Gujarat, India</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Calendar size={14} style={{ color: 'rgb(167,139,250)' }} />
@@ -752,7 +752,7 @@ export default function About() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Award size={14} style={{ color: 'rgb(52,211,153)' }} />
-                  <span>CGPA 9.15 / 10 · Dean's List</span>
+                  <span>CGPA 9.17 / 10 · Dean's List</span>
                 </div>
               </div>
             </div>
@@ -767,19 +767,16 @@ export default function About() {
                   style={{ background: 'radial-gradient(circle at top right, rgba(99,179,237,0.10), transparent 70%)' }}
                 />
                 <p className="font-manrope text-text-secondary text-base leading-relaxed mb-4">
-                  I'm a <span className="text-text-primary font-semibold">B.Tech CSE student</span> at{' '}
-                  <span className="text-text-primary font-semibold">Dr. Kiran &amp; Pallavi Patel Global University</span> with a CGPA of{' '}
-                  <span className="font-semibold" style={{ color: 'rgb(99,179,237)' }}>9.15</span>, deeply passionate about
-                  Artificial Intelligence, Machine Learning, and Data Science.
+                  I'm a <span className="text-text-primary font-semibold">Motivated Machine Learning / AI Engineer</span> focused on{' '}
+                  <span className="text-text-primary font-semibold">Machine Learning, Artificial Intelligence, Generative AI, LLMs</span>, and{' '}
+                  <span className="text-text-primary font-semibold">RAG</span>.
                 </p>
                 <p className="font-manrope text-text-secondary text-base leading-relaxed mb-4">
-                  My work spans building robust machine learning pipelines, evaluation protocols, and data preprocessing workflows.
-                  I'm also exploring modern concepts like <span className="text-text-primary font-semibold">LLMs</span>,{' '}
-                  <span className="text-text-primary font-semibold">RAG</span>, and full-stack solutions.
+                  Experienced in developing AI applications using Python, building ML workflows, integrating LLM-based systems, and deploying AI solutions through FastAPI and Docker.
                 </p>
                 <p className="font-manrope text-text-secondary text-base leading-relaxed">
-                  I'm actively seeking <span className="font-semibold" style={{ color: 'rgb(99,179,237)' }}>AI/ML Engineer
-                  and SDE roles</span> where I can contribute to high-impact projects and solve complex real-world problems.
+                  I have developed AI solutions for immersive AR/VR applications and intelligent agriculture systems, and I'm actively seeking <span className="font-semibold" style={{ color: 'rgb(99,179,237)' }}>AI/ML Engineer
+                  and SDE roles</span>.
                 </p>
               </div>
             </ScrollReveal>

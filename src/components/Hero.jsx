@@ -3,6 +3,7 @@ import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { ArrowRight, Github, Linkedin, Mail, ChevronDown } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import Lightspeed from './Lightspeed'
+import { useIsMobile } from '../hooks/useIsMobile'
 
 // ─── Typing hook ────────────────────────────────────────────────
 function useTypewriter(words, typingSpeed = 80, pauseDuration = 1800) {
@@ -88,15 +89,18 @@ export default function Hero() {
   const navigate = useNavigate()
   const [webglSupported, setWebglSupported] = useState(true)
 
+  const isMobile = useIsMobile()
+
   // Subtle mouse-parallax
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
   const springX = useSpring(mouseX, { stiffness: 60, damping: 20 })
   const springY = useSpring(mouseY, { stiffness: 60, damping: 20 })
-  const rotateX = useTransform(springY, [-300, 300], [3, -3])
-  const rotateY = useTransform(springX, [-300, 300], [-3, 3])
+  const rotateX = useTransform(springY, [-300, 300], isMobile ? [0, 0] : [3, -3])
+  const rotateY = useTransform(springX, [-300, 300], isMobile ? [0, 0] : [-3, 3])
 
   const handleMouseMove = (e) => {
+    if (isMobile) return;
     const rect = containerRef.current?.getBoundingClientRect()
     if (!rect) return
     mouseX.set(e.clientX - rect.left - rect.width / 2)

@@ -9,29 +9,29 @@ import ScrollReveal from './ScrollReveal'
 const STATS = [
   {
     icon: Code2,
-    value: '170+',
+    value: '290+',
     label: 'Problems Solved',
     sub: 'LeetCode',
     color: '#f59e0b',
   },
   {
     icon: Trophy,
-    value: 'Top 20%',
+    value: 'Top 15%',
     label: 'Global Rank',
-    sub: 'LeetCode',
+    sub: '504,089',
     color: '#00d4ff',
   },
   {
     icon: Target,
-    value: '50+',
+    value: '130+',
     label: 'Medium Solved',
     sub: 'Strong concepts',
     color: '#10d9a0',
   },
   {
     icon: TrendingUp,
-    value: '6mo',
-    label: 'Streak',
+    value: '48',
+    label: 'Max Streak',
     sub: 'Consistent practice',
     color: '#7c3aed',
   },
@@ -39,9 +39,9 @@ const STATS = [
 
 // ─── Difficulty breakdown ──────────────────────────────────────
 const DIFFICULTY = [
-  { label: 'Easy',   count: 90, total: 170, color: '#10d9a0' },
-  { label: 'Medium', count: 60, total: 170, color: '#f59e0b' },
-  { label: 'Hard',   count: 20, total: 170, color: '#ef4444' },
+  { label: 'Easy',   count: 142, total: 296, color: '#10d9a0' },
+  { label: 'Medium', count: 139, total: 296, color: '#f59e0b' },
+  { label: 'Hard',   count: 15, total: 296, color: '#ef4444' },
 ]
 
 // ─── Animated counter ─────────────────────────────────────────
@@ -176,7 +176,7 @@ export default function CodingProfile() {
               </div>
 
               <motion.a
-                href="https://leetcode.com/u/meetbarot/"
+                href="https://leetcode.com/u/meet2511/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-accent-cyan/10 border border-accent-cyan/30 text-accent-cyan font-semibold text-sm w-full transition-all"

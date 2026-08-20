@@ -1,11 +1,18 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Mail, Linkedin, Github, Send, CheckCircle, MapPin } from 'lucide-react'
+import { Mail, Linkedin, Github, Send, CheckCircle, MapPin, Phone } from 'lucide-react'
 import SectionHeader from './SectionHeader'
 import ScrollReveal from './ScrollReveal'
 
 // ─── Social links ──────────────────────────────────────────────
 const SOCIALS = [
+  {
+    icon: Phone,
+    label: 'Phone',
+    value: '+91-9016752932',
+    href: 'tel:+919016752932',
+    color: '#10b981',
+  },
   {
     icon: Mail,
     label: 'Email',
@@ -16,8 +23,8 @@ const SOCIALS = [
   {
     icon: Linkedin,
     label: 'LinkedIn',
-    value: 'linkedin.com/in/meet-barot',
-    href: 'https://www.linkedin.com/in/meet-barot-7b03862bb/',
+    value: 'linkedin.com/in/meetbarot',
+    href: 'https://www.linkedin.com/in/meetbarot',
     color: '#0a66c2',
   },
   {
@@ -63,17 +70,42 @@ function Field({ label, id, type = 'text', placeholder, value, onChange, textare
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
   const [sent, setSent] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleChange = key => e => setForm(f => ({ ...f, [key]: e.target.value }))
 
-  const handleSubmit = e => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // UI-only demo: simulate send
-    setSent(true)
-    setTimeout(() => {
-      setSent(false)
-      setForm({ name: '', email: '', subject: '', message: '' })
-    }, 3500)
+    setIsSubmitting(true)
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "b3c71c2e-4476-40a7-b5e9-485c906060c0",
+          ...form
+        }),
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setSent(true)
+        setTimeout(() => {
+          setSent(false)
+          setForm({ name: '', email: '', subject: '', message: '' })
+        }, 3500)
+      } else {
+        alert("Something went wrong! Please try again.")
+      }
+    } catch (error) {
+      alert("Error sending message! Please check your connection.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -203,12 +235,13 @@ export default function Contact() {
 
                     <motion.button
                       type="submit"
-                      className="w-full flex items-center justify-center gap-2 py-4 rounded-xl bg-accent-cyan text-bg-primary font-semibold font-manrope text-base mt-2 transition-all"
-                      whileHover={{ scale: 1.02, boxShadow: '0 0 40px rgba(0,212,255,0.3)' }}
-                      whileTap={{ scale: 0.98 }}
+                      disabled={isSubmitting}
+                      className="w-full flex items-center justify-center gap-2 py-4 rounded-xl bg-accent-cyan text-bg-primary font-semibold font-manrope text-base mt-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                      whileHover={{ scale: isSubmitting ? 1 : 1.02, boxShadow: isSubmitting ? 'none' : '0 0 40px rgba(0,212,255,0.3)' }}
+                      whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
                     >
-                      <Send size={17} />
-                      Send Message
+                      <Send size={17} className={isSubmitting ? 'animate-pulse' : ''} />
+                      {isSubmitting ? 'Sending...' : 'Send Message'}
                     </motion.button>
                   </motion.form>
                 ) : (

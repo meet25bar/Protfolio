@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Geist, Inter, "Segoe UI", sans-serif;
+  color: #1a1c19;
+  background: #f4f7f2;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 1280px;
+  background: #f4f7f2;
+}
+
+body {
+  min-width: 1280px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  outline-color: #2e7d32;
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(46, 125, 50, 0.28);
+}
+
+@layer components {
+  .card {
+    @apply rounded-xl border border-line bg-white shadow-card;
+  }
+
+  .field-label {
+    @apply mb-2 block text-sm font-semibold text-ink;
+  }
+
+  .field {
+    @apply h-11 w-full rounded-lg border border-line bg-white px-3 text-sm text-ink transition;
+  }
+
+  .field::placeholder {
+    @apply text-slate-400;
+  }
+
+  .field:hover {
+    @apply border-brand-700/40;
+  }
+
+  .field:focus {
+    @apply border-brand-700 ring-2 ring-brand-700/10;
+  }
+
+  .btn {
+    @apply inline-flex h-10 items-center justify-center gap-2 rounded-lg border px-4 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply border-brand-700 bg-brand-700 text-white hover:bg-brand-800;
+  }
+
+  .btn-secondary {
+    @apply border-brand-700 bg-white text-brand-800 hover:bg-brand-50;
+  }
+
+  .btn-danger {
+    @apply border-red-500 bg-white text-red-600 hover:bg-red-50;
+  }
+
+  .section-title {
+    @apply text-base font-bold text-ink;
+  }
+
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-wide text-muted;
+  }
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.toast-in {
+  animation: toast-in 180ms ease-out;
+}

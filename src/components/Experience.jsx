@@ -8,17 +8,18 @@ import ScrollReveal from './ScrollReveal'
 // ─── Experience data ───────────────────────────────────────────
 const EXPERIENCES = [
   {
-    role: 'Python Developer',
-    company: '[Company Name Placeholder]',
-    type: 'Experience',
-    period: '2 mos',
-    location: '[Location Placeholder]',
+    role: 'Gen AI Trainee',
+    company: 'SpectoV',
+    type: 'Internship',
+    period: 'Jul 2026 – Present',
+    location: 'Remote',
     color: '#eab308',
     contributions: [
-      '[Contribution placeholder 1]',
-      '[Contribution placeholder 2]',
+      'Developing Generative AI solutions for Augmented Reality (AR) and Virtual Reality (VR) applications using Python and Large Language Models (LLMs)',
+      'Engineering and integrating LLM-based workflows into immersive AR/VR experiences for AI-driven content generation and interactive user experiences',
+      'Applying prompt engineering, model evaluation, and Generative AI techniques to develop and refine intelligent solutions for immersive applications',
     ],
-    skills: ['Python'],
+    skills: ['Python', 'Generative AI', 'LLMs', 'AR/VR'],
   },
   {
     role: 'Machine Learning Intern',
@@ -28,9 +29,9 @@ const EXPERIENCES = [
     location: 'Remote',
     color: '#00d4ff',
     contributions: [
-      'Developed and evaluated predictive machine learning models on real-world datasets, improving prediction performance through preprocessing and feature engineering',
-      'Analyzed structured datasets to identify patterns and generate actionable insights using statistical methods and visualization libraries',
-      'Applied LLM and RAG concepts to design intelligent workflows and solve real-world problem scenarios',
+      'Developed and evaluated machine learning models on real-world datasets using Python, Scikit-learn, and Pandas',
+      'Engineered data preprocessing and feature engineering workflows alongside exploratory data analysis and visualization to improve model performance',
+      'Designed intelligent workflows using Large Language Models (LLMs) and Retrieval-Augmented Generation (RAG) concepts for real-world problem scenarios',
     ],
     skills: ['Python', 'Scikit-learn', 'Pandas', 'LLMs', 'RAG'],
   },
@@ -38,7 +39,7 @@ const EXPERIENCES = [
     role: 'Java Developer Intern',
     company: 'Cognifyz Technologies',
     type: 'Internship',
-    period: 'Mar 2025 - Apr 2025 · 2 mos',
+    period: 'Mar 2025 – Apr 2025',
     location: 'Bharuch, Gujarat, India · Remote',
     color: '#a78bfa',
     contributions: [
@@ -60,7 +61,7 @@ const EXPERIENCES = [
       'Executed and optimized social media marketing campaigns, managed client interactions, and performed business conversion analytics',
     ],
     skills: ['Shopify', 'Business Analytics', 'Social Media Marketing', 'Operations'],
-  },
+  }
 ]
 
 // ─── Experience card ───────────────────────────────────────────

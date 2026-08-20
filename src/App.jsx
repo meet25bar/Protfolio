@@ -63,21 +63,29 @@ export default function App() {
                 className="min-h-screen flex flex-col"
               >
                 {/* Main routing content */}
-                <main className="flex-grow flex flex-col">
+                <main className="flex-grow flex flex-col pb-20 md:pb-0">
                   <AnimatePresence mode="wait">
                     <Routes location={location} key={location.pathname}>
                       <Route path="/" element={<Hero />} />
-                      <Route path="/about" element={<About />} />
+                      <Route path="/about" element={
+                        <>
+                          <About />
+                          <CodingProfile />
+                        </>
+                      } />
                       <Route path="/projects" element={<Projects />} />
-                      <Route path="/experience" element={<Experience />} />
+                      <Route path="/experience" element={
+                        <>
+                          <Experience />
+                          <Certifications />
+                        </>
+                      } />
                       <Route path="/contact" element={<Contact />} />
                     </Routes>
                   </AnimatePresence>
                 </main>
 
-                {/* Certifications and CodingProfile can be their own routes or just integrated into About/Experience. 
-                    Leaving them out of the main nav for now as per reference dock layout, but they exist as components. */}
-              </motion.div>
+                </motion.div>
 
               {/* Navigation */}
               <Navbar />
