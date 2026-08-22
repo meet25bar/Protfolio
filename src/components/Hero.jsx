@@ -127,7 +127,7 @@ export default function Hero() {
       id="hero"
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className={`relative min-h-screen flex flex-col items-center justify-center overflow-hidden pb-28 pt-12 md:pb-0 md:pt-0 ${
+      className={`relative min-h-screen flex flex-col items-center justify-center overflow-hidden pb-32 pt-8 sm:pt-12 md:pb-0 md:pt-0 ${
         webglSupported ? '' : 'grid-bg'
       }`}
     >
@@ -149,16 +149,16 @@ export default function Hero() {
 
       {/* ── Main content ── */}
       <motion.div
-        className="relative z-20 text-center px-6 max-w-3xl mx-auto"
+        className="relative z-20 text-center px-5 sm:px-6 max-w-3xl mx-auto"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
         style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
       >
         {/* Availability badge */}
-        <motion.div variants={itemVariants} className="flex justify-center mb-5 md:mb-6">
+        <motion.div variants={itemVariants} className="flex justify-center mb-3 sm:mb-5 md:mb-6">
           <span
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-mono font-medium"
+            className="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-[11px] sm:text-sm font-mono font-medium"
             style={{
               background: 'rgb(var(--accent-cyan) / 0.1)',
               border: '1px solid rgb(var(--accent-cyan) / 0.35)',
@@ -173,7 +173,7 @@ export default function Hero() {
         {/* Main headline */}
         <motion.h1
           variants={itemVariants}
-          className="font-syne font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl leading-[0.95] mb-4 md:mb-5"
+          className="font-syne font-extrabold text-[2.5rem] sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl leading-[0.92] mb-2 sm:mb-4 md:mb-5"
         >
           <span className="block text-text-primary">Meet</span>
           <span className="block gradient-text">Barot</span>
@@ -182,7 +182,7 @@ export default function Hero() {
         {/* Typed role */}
         <motion.div
           variants={itemVariants}
-          className="font-mono text-base sm:text-lg mb-4 h-7 sm:h-8"
+          className="font-mono text-sm sm:text-lg mb-3 sm:mb-4 h-6 sm:h-8"
           style={{ color: 'rgb(var(--accent-cyan) / 0.95)' }}
         >
           <span>{typedRole}</span>
@@ -192,7 +192,7 @@ export default function Hero() {
         {/* Tagline */}
         <motion.p
           variants={itemVariants}
-          className="font-manrope text-text-secondary text-base sm:text-lg max-w-lg mx-auto mb-8 leading-relaxed"
+          className="font-manrope text-text-secondary text-sm sm:text-base md:text-lg max-w-lg mx-auto mb-5 sm:mb-8 leading-relaxed"
         >
           Building{' '}
           <span className="text-text-primary font-medium">intelligent systems</span> and{' '}
@@ -203,7 +203,7 @@ export default function Hero() {
         {/* CTA buttons */}
         <motion.div
           variants={itemVariants}
-          className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-8"
+          className="flex flex-col sm:flex-row gap-2.5 sm:gap-4 justify-center items-center mb-5 sm:mb-8"
         >
           {/* Primary — View Projects */}
           <motion.button
@@ -245,7 +245,7 @@ export default function Hero() {
         </motion.div>
 
         {/* Social links */}
-        <motion.div variants={itemVariants} className="flex items-center justify-center gap-4 mb-10">
+        <motion.div variants={itemVariants} className="flex items-center justify-center gap-3 sm:gap-4 mb-6 sm:mb-10">
           {[
             { icon: Github,   href: 'https://github.com/meet25bar',     label: 'GitHub'   },
             { icon: Linkedin, href: 'https://linkedin.com/in/meetbarot', label: 'LinkedIn' },
@@ -257,7 +257,7 @@ export default function Hero() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
-              className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200"
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-200"
               style={{
                 border: '1px solid rgb(var(--text-primary) / 0.18)',
                 color: 'rgb(var(--text-secondary))',
@@ -265,7 +265,7 @@ export default function Hero() {
               whileHover={{ scale: 1.15, y: -2 }}
               whileTap={{ scale: 0.9 }}
             >
-              <Icon size={17} />
+              <Icon size={15} className="sm:w-[17px] sm:h-[17px]" />
             </motion.a>
           ))}
         </motion.div>

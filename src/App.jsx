@@ -63,7 +63,7 @@ export default function App() {
                 className="min-h-screen flex flex-col"
               >
                 {/* Main routing content */}
-                <main className="flex-grow flex flex-col pb-20 md:pb-0">
+                <main className="flex-grow flex flex-col pb-24 md:pb-0">
                   <AnimatePresence mode="wait">
                     <Routes location={location} key={location.pathname}>
                       <Route path="/" element={<Hero />} />

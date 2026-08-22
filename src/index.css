@@ -124,6 +124,13 @@ html {
   }
 }
 
+/* ── Mobile base adjustments ── */
+@media (max-width: 374px) {
+  html {
+    font-size: 93%;
+  }
+}
+
 body {
   font-family: 'Manrope', sans-serif;
   background-color: rgb(var(--bg-primary));
@@ -154,9 +161,27 @@ body {
 }
 
 .section {
-  @apply py-16 md:py-20 lg:py-24 pb-32;
-  padding-bottom: calc(7.5rem + env(safe-area-inset-bottom, 0px));
+  @apply py-12 md:py-20 lg:py-24;
+  padding-bottom: calc(6rem + env(safe-area-inset-bottom, 0px));
   min-height: 100vh;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding-bottom: calc(7.5rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* ── Safe-area bottom padding utility ── */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ── Mobile glass-card padding reduction ── */
+@media (max-width: 639px) {
+  .glass-card-mobile-compact {
+    padding: 1.25rem;
+  }
 }
 
 /* ── GRADIENT TEXT ────────────────────────────────────────── */

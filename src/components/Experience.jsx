@@ -106,7 +106,7 @@ function ExperienceCard({ exp, index }) {
           stiffness: 150,
           damping: 20
         }}
-        className="flex-1 glass-card p-7 relative overflow-hidden group transition-all duration-300"
+        className="flex-1 glass-card p-5 sm:p-7 relative overflow-hidden group transition-all duration-300"
         style={{
           borderTop: `2px solid ${exp.color}40`,
         }}

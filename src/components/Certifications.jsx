@@ -63,7 +63,7 @@ function CertCard({ cert, index }) {
   return (
     <ScrollReveal variant="scale" delay={index * 0.12}>
       <motion.div
-        className="glass-card p-7 relative overflow-hidden h-full"
+        className="glass-card p-5 sm:p-7 relative overflow-hidden h-full"
         whileHover={{ y: -6, boxShadow: `0 30px 60px rgba(0,0,0,0.4), 0 0 40px ${cert.color}12` }}
         transition={{ duration: 0.3 }}
       >

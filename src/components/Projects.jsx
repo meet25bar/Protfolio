@@ -8,6 +8,7 @@ import {
 import imgPaw from './project_pawperfection.png'
 import imgCrop from './project_cropyield.png'
 import imgCancer from './project_breastcancer.png'
+import { useIsMobile } from '../hooks/useIsMobile'
 
 // ─── Project data ──────────────────────────────────────────────
 const PROJECTS = [
@@ -128,7 +129,7 @@ function DetailPanel({ project, onClose }) {
 
       {/* Panel */}
       <motion.div
-        className="relative z-10 w-full max-w-3xl mx-4 max-h-[85vh] overflow-y-auto rounded-2xl"
+        className="relative z-10 w-full max-w-3xl mx-4 sm:mx-auto max-h-[85vh] overflow-y-auto rounded-2xl"
         style={{
           background: 'rgb(var(--bg-card) / 0.95)',
           border: '1px solid rgb(var(--text-primary) / 0.08)',
@@ -167,7 +168,7 @@ function DetailPanel({ project, onClose }) {
         </div>
 
         {/* Content */}
-        <div className="px-8 pb-8 -mt-8 relative z-10">
+        <div className="px-5 sm:px-8 pb-6 sm:pb-8 -mt-8 relative z-10">
           {/* Title row */}
           <div className="flex items-start justify-between gap-4 mb-2">
             <div>
@@ -370,7 +371,7 @@ function ThumbnailStrip({ projects, activeIndex, onSelect }) {
 function Counter({ active, total }) {
   return (
     <div
-      className="absolute top-8 right-8 z-[5] font-mono text-xs"
+      className="absolute top-4 right-14 sm:top-8 sm:right-8 z-[5] font-mono text-[10px] sm:text-xs"
       style={{ color: 'rgb(var(--text-primary) / 0.5)', letterSpacing: '0.08em' }}
     >
       {String(active + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
@@ -387,6 +388,7 @@ export default function Projects() {
   const [detailProject, setDetailProject] = useState(null)
   const containerRef = useRef(null)
   const autoplayRef = useRef(null)
+  const isMobileView = useIsMobile()
 
   const current = PROJECTS[activeIndex]
 
@@ -468,7 +470,7 @@ export default function Projects() {
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
         className="relative w-full overflow-hidden"
-        style={{ height: '100vh', minHeight: 560, background: 'rgb(var(--bg-primary))' }}
+        style={{ height: '100dvh', minHeight: 560, background: 'rgb(var(--bg-primary))' }}
       >
         {/* ── Background image slide ── */}
         <AnimatePresence initial={false} custom={direction}>
@@ -499,9 +501,9 @@ export default function Projects() {
         />
 
         {/* ── Metadata top-left ── */}
-        <div className="absolute top-8 left-8 z-[5]">
+        <div className="absolute top-4 left-4 sm:top-8 sm:left-8 z-[5]">
           <span
-            className="font-mono text-[11px] tracking-wider"
+            className="font-mono text-[10px] sm:text-[11px] tracking-wider"
             style={{ color: 'rgb(var(--text-primary) / 0.5)' }}
           >
             {current.metadata}
@@ -524,7 +526,7 @@ export default function Projects() {
               animate="center"
               exit="exit"
               transition={{ duration: 0.7, ease: EASE }}
-              className="text-center px-4 py-6 sm:px-6 max-w-[90vw] sm:max-w-xl w-full rounded-2xl"
+              className="text-center px-4 py-4 sm:px-6 sm:py-6 max-w-[88vw] sm:max-w-xl w-full rounded-2xl"
               style={{
                 background: 'rgb(var(--bg-primary) / 0.5)',
                 backdropFilter: 'blur(20px)',
@@ -534,7 +536,7 @@ export default function Projects() {
             >
               {/* Subtitle */}
               <motion.span
-                className="font-mono text-[10px] tracking-[0.2em] uppercase block mb-3"
+                className="font-mono text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.2em] uppercase block mb-2 sm:mb-3 line-clamp-1"
                 style={{ color: current.color, opacity: 0.85 }}
               >
                 {current.subtitle}
@@ -542,7 +544,7 @@ export default function Projects() {
 
               {/* Title */}
               <h1
-                className="font-syne font-extrabold text-2xl sm:text-3xl lg:text-[2rem] uppercase leading-none mb-4"
+                className="font-syne font-extrabold text-xl sm:text-3xl lg:text-[2rem] uppercase leading-tight sm:leading-none mb-2 sm:mb-4"
                 style={{
                   color: 'rgb(var(--text-primary))',
                   textShadow: '0 4px 40px rgb(var(--bg-primary) / 0.6)',
@@ -554,7 +556,7 @@ export default function Projects() {
 
               {/* Short description */}
               <p
-                className="font-manrope text-xs sm:text-sm max-w-sm mx-auto mb-5 leading-relaxed"
+                className="font-manrope text-[11px] sm:text-sm max-w-sm mx-auto mb-3 sm:mb-5 leading-relaxed"
                 style={{
                   color: 'rgb(var(--text-primary) / 0.75)',
                   textShadow: '0 1px 8px rgb(var(--bg-primary) / 0.3)',
@@ -566,7 +568,7 @@ export default function Projects() {
               {/* "View Details" button */}
               <motion.button
                 onClick={() => { setDetailProject(current); clearInterval(autoplayRef.current) }}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-manrope font-semibold text-xs"
+                className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full font-manrope font-semibold text-[11px] sm:text-xs"
                 style={{
                   background: 'rgb(var(--bg-primary) / 0.3)',
                   border: '1px solid rgb(var(--text-primary) / 0.2)',
@@ -586,11 +588,11 @@ export default function Projects() {
               </motion.button>
 
               {/* Tech pills */}
-              <div className="flex flex-wrap justify-center gap-1.5 mt-5">
-                {current.tech.slice(0, 5).map(t => (
+              <div className="flex flex-wrap justify-center gap-1 sm:gap-1.5 mt-3 sm:mt-5">
+                {current.tech.slice(0, isMobileView ? 3 : 5).map(t => (
                   <span
                     key={t}
-                    className="px-3 py-1 rounded-full font-mono text-[10px]"
+                    className="px-2 py-0.5 sm:px-3 sm:py-1 rounded-full font-mono text-[9px] sm:text-[10px]"
                     style={{
                       background: 'rgb(var(--text-primary) / 0.08)',
                       border: '1px solid rgb(var(--text-primary) / 0.12)',
@@ -600,16 +602,16 @@ export default function Projects() {
                     {t}
                   </span>
                 ))}
-                {current.tech.length > 5 && (
+                {current.tech.length > (isMobileView ? 3 : 5) && (
                   <span
-                    className="px-3 py-1 rounded-full font-mono text-[10px]"
+                    className="px-2 py-0.5 sm:px-3 sm:py-1 rounded-full font-mono text-[9px] sm:text-[10px]"
                     style={{
                       background: 'rgb(var(--text-primary) / 0.06)',
                       border: '1px solid rgb(var(--text-primary) / 0.1)',
                       color: 'rgb(var(--text-primary) / 0.45)',
                     }}
                   >
-                    +{current.tech.length - 5} more
+                    +{current.tech.length - (isMobileView ? 3 : 5)} more
                   </span>
                 )}
               </div>
@@ -618,7 +620,7 @@ export default function Projects() {
         </div>
 
         {/* ── Prev / Next buttons ── */}
-        <div className="absolute bottom-20 left-6 sm:bottom-8 sm:left-8 z-[6] flex gap-4">
+        <div className="absolute bottom-24 left-6 sm:bottom-8 sm:left-8 z-[6] flex gap-3 sm:gap-4">
           <NavButton direction="left"  onClick={handleNav(prev)} />
           <NavButton direction="right" onClick={handleNav(next)} />
         </div>

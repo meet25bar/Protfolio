@@ -36,12 +36,13 @@ const SOCIALS = [
   },
 ]
 
-// ─── Input field ───────────────────────────────────────────────
-function Field({ label, id, type = 'text', placeholder, value, onChange, textarea }) {
+// ─── Input field ───────────────────────────────────────────────────────
+function Field({ label, id, type = 'text', placeholder, value, onChange, textarea, required }) {
   return (
     <div className="mb-5">
       <label htmlFor={id} className="block font-manrope text-sm font-medium text-text-secondary mb-2">
         {label}
+        {required && <span className="text-red-400 ml-1">*</span>}
       </label>
       {textarea ? (
         <textarea
@@ -50,6 +51,7 @@ function Field({ label, id, type = 'text', placeholder, value, onChange, textare
           placeholder={placeholder}
           value={value}
           onChange={onChange}
+          required={required}
           className="w-full bg-surface rounded-xl border border-surface-border px-4 py-3 font-manrope text-text-primary text-sm placeholder:text-text-muted resize-none focus:outline-none focus:border-accent-cyan/50 focus:bg-surface-hover transition-all duration-200"
         />
       ) : (
@@ -59,6 +61,7 @@ function Field({ label, id, type = 'text', placeholder, value, onChange, textare
           placeholder={placeholder}
           value={value}
           onChange={onChange}
+          required={required}
           className="w-full bg-surface rounded-xl border border-surface-border px-4 py-3 font-manrope text-text-primary text-sm placeholder:text-text-muted focus:outline-none focus:border-accent-cyan/50 focus:bg-surface-hover transition-all duration-200"
         />
       )}
@@ -76,6 +79,21 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    // Client-side validation — all fields required
+    const { name, email, subject, message } = form
+    if (!name.trim() || !email.trim() || !subject.trim() || !message.trim()) {
+      alert('Please fill in all fields before sending.')
+      return
+    }
+
+    // Basic email format check
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email.trim())) {
+      alert('Please enter a valid email address.')
+      return
+    }
+
     setIsSubmitting(true)
 
     try {
@@ -121,11 +139,11 @@ export default function Contact() {
           subtitle="Open to opportunities, collaborations, and interesting conversations."
         />
 
-        <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 max-w-5xl mx-auto">
           {/* Left: Info + socials */}
           <ScrollReveal variant="fade-left">
             <div className="flex flex-col h-full">
-              <div className="glass-card p-8 mb-5 flex-1">
+              <div className="glass-card p-5 sm:p-8 mb-5 flex-1">
                 <h3 className="font-syne font-bold text-2xl text-text-primary mb-4">
                   Let's Build Something
                 </h3>
@@ -188,7 +206,7 @@ export default function Contact() {
 
           {/* Right: Form */}
           <ScrollReveal variant="fade-right">
-            <div className="glass-card p-8 relative overflow-hidden">
+            <div className="glass-card p-5 sm:p-8 relative overflow-hidden">
               {/* Top accent */}
               <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-accent-cyan via-accent-violet to-accent-emerald" />
 
@@ -207,6 +225,7 @@ export default function Contact() {
                         placeholder="John Doe"
                         value={form.name}
                         onChange={handleChange('name')}
+                        required
                       />
                       <Field
                         label="Email Address"
@@ -215,6 +234,7 @@ export default function Contact() {
                         placeholder="john@example.com"
                         value={form.email}
                         onChange={handleChange('email')}
+                        required
                       />
                     </div>
                     <Field
@@ -223,6 +243,7 @@ export default function Contact() {
                       placeholder="SDE Opportunity / Collaboration"
                       value={form.subject}
                       onChange={handleChange('subject')}
+                      required
                     />
                     <Field
                       label="Message"
@@ -231,6 +252,7 @@ export default function Contact() {
                       placeholder="Tell me about the opportunity or project..."
                       value={form.message}
                       onChange={handleChange('message')}
+                      required
                     />
 
                     <motion.button

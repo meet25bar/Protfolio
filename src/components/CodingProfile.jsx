@@ -55,7 +55,7 @@ function AnimatedStat({ stat, index }) {
       initial={{ opacity: 0, y: 30 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="glass-card p-7 text-center relative overflow-hidden group"
+      className="glass-card p-5 sm:p-7 text-center relative overflow-hidden group"
       whileHover={{ y: -5, boxShadow: `0 20px 50px rgba(0,0,0,0.4), 0 0 30px ${stat.color}15` }}
     >
       {/* Glow bg */}
@@ -129,7 +129,7 @@ export default function CodingProfile() {
         />
 
         {/* Stats grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-12">
           {STATS.map((stat, i) => (
             <AnimatedStat key={stat.label} stat={stat} index={i} />
           ))}
@@ -139,7 +139,7 @@ export default function CodingProfile() {
         <div className="grid md:grid-cols-2 gap-8">
           {/* Difficulty bars */}
           <ScrollReveal variant="fade-left">
-            <div className="glass-card p-8">
+            <div className="glass-card p-5 sm:p-8">
               <h3 className="font-syne font-bold text-lg text-text-primary mb-8">
                 Problem Breakdown
               </h3>
@@ -151,7 +151,7 @@ export default function CodingProfile() {
 
           {/* Profile CTA */}
           <ScrollReveal variant="fade-right">
-            <div className="glass-card p-8 flex flex-col justify-between h-full">
+            <div className="glass-card p-5 sm:p-8 flex flex-col justify-between h-full">
               <div>
                 <div className="text-4xl mb-4">⚡</div>
                 <h3 className="font-syne font-bold text-2xl text-text-primary mb-3">

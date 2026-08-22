@@ -459,7 +459,7 @@ function CodingStatsPanel() {
   return (
     <div className="grid md:grid-cols-2 gap-5">
       {/* LeetCode Card */}
-      <div className="glass-card p-6 relative overflow-hidden">
+      <div className="glass-card p-5 sm:p-6 relative overflow-hidden">
         <div
           className="absolute top-0 right-0 w-32 h-32 pointer-events-none"
           style={{ background: 'radial-gradient(circle at top right, rgba(251,191,36,0.08), transparent 70%)' }}
@@ -564,7 +564,7 @@ function CodingStatsPanel() {
       </div>
 
       {/* GitHub Card */}
-      <div className="glass-card p-6 relative overflow-hidden">
+      <div className="glass-card p-5 sm:p-6 relative overflow-hidden">
         <div
           className="absolute top-0 right-0 w-28 h-28 pointer-events-none"
           style={{ background: 'radial-gradient(circle at top right, rgba(52,211,153,0.08), transparent 70%)' }}
@@ -578,7 +578,8 @@ function CodingStatsPanel() {
           <span className="font-manrope text-sm text-text-muted">contributions in the last year</span>
         </div>
         {/* Mini heatmap grid */}
-        <div className="flex gap-[3px] flex-wrap">
+        <div className="overflow-x-auto -mx-2 px-2">
+          <div className="flex gap-[3px] flex-nowrap min-w-max">
           {Array.from({ length: 52 }, (_, week) => (
             <div key={week} className="flex flex-col gap-[3px]">
               {Array.from({ length: 7 }, (_, day) => {
@@ -599,7 +600,9 @@ function CodingStatsPanel() {
                 )
               })}
             </div>
-          ))}
+          ))
+        }
+        </div>
         </div>
         <div className="flex items-center gap-2 mt-3 justify-end">
           <span className="font-mono text-[9px] text-text-muted">Less</span>
@@ -716,18 +719,18 @@ export default function About() {
         />
 
         {/* ── TOP: Photo + Bio + Stats ── */}
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-start mb-12">
+        <div className="grid lg:grid-cols-2 gap-7 sm:gap-10 lg:gap-12 items-start mb-12">
 
           {/* Left: Photo + recruiter highlights */}
           <ScrollReveal variant="fade-left">
-            <div className="flex flex-col items-center lg:items-start gap-10">
+            <div className="flex flex-col items-center lg:items-start gap-6 sm:gap-10">
 
               {/* Photo */}
               <PhotoCard />
 
               {/* Availability badge */}
               <motion.div
-                className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-mono font-medium mt-6"
+                className="flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-mono font-medium mt-4 sm:mt-6"
                 style={{
                   background: 'rgba(52,211,153,0.08)',
                   border: '1px solid rgba(52,211,153,0.25)',
@@ -761,7 +764,7 @@ export default function About() {
           {/* Right: Bio + Stats */}
           <div>
             <ScrollReveal variant="fade-right">
-              <div className="glass-card p-7 mb-6 relative overflow-hidden">
+              <div className="glass-card p-5 sm:p-7 mb-6 relative overflow-hidden">
                 <div
                   className="absolute top-0 right-0 w-28 h-28 pointer-events-none"
                   style={{ background: 'radial-gradient(circle at top right, rgba(99,179,237,0.10), transparent 70%)' }}

@@ -24,7 +24,7 @@ export default function MobileNavbar() {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         onClick={toggle}
-        className="fixed top-4 right-4 z-50 p-3 rounded-full border glass-card"
+        className="fixed top-4 right-4 z-50 p-2.5 rounded-full border glass-card"
         style={{
           backgroundColor: isDark ? 'rgba(12, 22, 40, 0.7)' : 'rgba(255, 255, 255, 0.7)',
           borderColor: isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
@@ -33,9 +33,9 @@ export default function MobileNavbar() {
         aria-label="Toggle Theme"
       >
         {isDark ? (
-          <Sun size={20} color="rgba(251, 191, 36, 1)" />
+          <Sun size={18} color="rgba(251, 191, 36, 1)" />
         ) : (
-          <Moon size={20} color="#1e293b" />
+          <Moon size={18} color="#1e293b" />
         )}
       </motion.button>
 
@@ -44,14 +44,18 @@ export default function MobileNavbar() {
         initial={{ y: 100 }}
         animate={{ y: 0 }}
         transition={{ type: 'spring', stiffness: 260, damping: 25 }}
-        className="fixed bottom-0 left-0 right-0 z-50 border-t pb-safe"
+        className="fixed bottom-0 left-0 right-0 z-50 border-t"
         style={{
-          backgroundColor: isDark ? 'rgba(3, 8, 17, 0.85)' : 'rgba(255, 255, 255, 0.85)',
-          borderColor: isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
-          backdropFilter: 'blur(20px) saturate(150%)',
+          backgroundColor: isDark ? 'rgba(3, 8, 17, 0.92)' : 'rgba(255, 255, 255, 0.92)',
+          borderColor: isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.08)',
+          backdropFilter: 'blur(24px) saturate(150%)',
+          boxShadow: isDark
+            ? '0 -4px 20px rgba(0, 0, 0, 0.4)'
+            : '0 -4px 20px rgba(0, 0, 0, 0.08)',
+          paddingBottom: 'env(safe-area-inset-bottom, 0px)',
         }}
       >
-        <div className="flex justify-around items-center px-2 py-3">
+        <div className="flex justify-around items-center px-1 py-2">
           {NAV_LINKS.map((link) => {
             const isActive = location.pathname === link.path;
             const Icon = link.icon;
@@ -59,7 +63,7 @@ export default function MobileNavbar() {
               <button
                 key={link.path}
                 onClick={() => navigate(link.path)}
-                className="flex flex-col items-center justify-center w-full relative"
+                className="flex flex-col items-center justify-center w-full relative py-1"
                 aria-label={link.label}
               >
                 <div
@@ -72,7 +76,7 @@ export default function MobileNavbar() {
                   }`}
                 >
                   <Icon
-                    size={22}
+                    size={20}
                     strokeWidth={isActive ? 2.5 : 2}
                     style={{
                       color: isActive
@@ -80,22 +84,22 @@ export default function MobileNavbar() {
                           ? '#00d4ff'
                           : '#0284c7'
                         : isDark
-                        ? 'rgba(255,255,255,0.5)'
-                        : 'rgba(15,23,42,0.5)',
+                        ? 'rgba(255,255,255,0.45)'
+                        : 'rgba(15,23,42,0.45)',
                       filter: isActive ? 'drop-shadow(0 0 6px rgba(0,212,255,0.3))' : 'none',
                     }}
                   />
                 </div>
                 <span
-                  className="text-[10px] mt-1 font-medium tracking-wide transition-colors duration-300"
+                  className="text-[9px] mt-0.5 font-medium tracking-wide transition-colors duration-300"
                   style={{
                     color: isActive
                       ? isDark
                         ? '#00d4ff'
                         : '#0284c7'
                       : isDark
-                      ? 'rgba(255,255,255,0.5)'
-                      : 'rgba(15,23,42,0.5)',
+                      ? 'rgba(255,255,255,0.45)'
+                      : 'rgba(15,23,42,0.45)',
                   }}
                 >
                   {link.label}
