@@ -127,10 +127,14 @@ export default function Hero() {
       id="hero"
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className={`relative flex flex-col items-center justify-center overflow-hidden pb-36 pt-8 sm:pt-12 md:pb-0 md:pt-0 ${
+      className={`hero-section relative flex flex-col items-center justify-center overflow-hidden pt-8 sm:pt-12 md:pt-0 ${
         webglSupported ? '' : 'grid-bg'
       }`}
-      style={{ minHeight: '100svh' }}
+      style={{
+        minHeight: '100svh',
+        height: 'auto',
+        paddingBottom: 'calc(96px + env(safe-area-inset-bottom, 0px))',
+      }}
     >
       {/* Lightspeed shader */}
       <Lightspeed onWebGLInitResult={setWebglSupported} />

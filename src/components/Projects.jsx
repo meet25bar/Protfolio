@@ -109,16 +109,75 @@ function NavButton({ direction, onClick }) {
 }
 
 // ─── Detail Overlay ─────────────────────────────────────────────
-function DetailPanel({ project, onClose }) {
+function DetailPanel({ project, onClose, triggerRef }) {
+  const panelRef = useRef(null)
+  const closeButtonRef = useRef(null)
+
+  // Lock body scroll and trap focus while open
+  useEffect(() => {
+    if (!project) return
+
+    // Lock scroll
+    const prevOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    // Escape key handler
+    const onKey = (e) => {
+      if (e.key === 'Escape') {
+        e.stopPropagation()
+        onClose()
+      }
+
+      // Focus trap: Tab key
+      if (e.key === 'Tab' && panelRef.current) {
+        const focusable = panelRef.current.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        )
+        if (focusable.length === 0) return
+        const first = focusable[0]
+        const last = focusable[focusable.length - 1]
+        if (e.shiftKey) {
+          if (document.activeElement === first) {
+            e.preventDefault()
+            last.focus()
+          }
+        } else {
+          if (document.activeElement === last) {
+            e.preventDefault()
+            first.focus()
+          }
+        }
+      }
+    }
+
+    window.addEventListener('keydown', onKey)
+
+    // Auto-focus close button
+    requestAnimationFrame(() => {
+      closeButtonRef.current?.focus()
+    })
+
+    return () => {
+      document.body.style.overflow = prevOverflow
+      window.removeEventListener('keydown', onKey)
+      // Return focus to trigger element
+      triggerRef?.current?.focus()
+    }
+  }, [project, onClose, triggerRef])
+
   if (!project) return null
 
   return (
     <motion.div
+      ref={panelRef}
       className="fixed inset-0 z-[100] flex items-center justify-center"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.35, ease: EASE }}
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${project.title} project details`}
     >
       {/* Backdrop */}
       <motion.div
@@ -154,6 +213,7 @@ function DetailPanel({ project, onClose }) {
           />
           {/* Close button */}
           <motion.button
+            ref={closeButtonRef}
             onClick={onClose}
             className="absolute top-4 right-4 w-11 h-11 rounded-full flex items-center justify-center"
             style={{
@@ -390,9 +450,12 @@ export default function Projects() {
   const [activeIndex, setActiveIndex] = useState(0)
   const [direction, setDirection] = useState(0)
   const [detailProject, setDetailProject] = useState(null)
+  const [isHovering, setIsHovering] = useState(false)
   const containerRef = useRef(null)
   const autoplayRef = useRef(null)
+  const viewDetailsRef = useRef(null)
   const isMobileView = useIsMobile()
+  const swipeBlocked = useRef(false)
 
   const current = PROJECTS[activeIndex]
 
@@ -413,16 +476,23 @@ export default function Projects() {
     setActiveIndex(i => (i - 1 + PROJECTS.length) % PROJECTS.length)
   }, [])
 
-  // Autoplay
+  // Autoplay — pause when hovering, focusing, or detail panel is open
   useEffect(() => {
+    if (isHovering || detailProject) {
+      clearInterval(autoplayRef.current)
+      autoplayRef.current = null
+      return
+    }
     autoplayRef.current = setInterval(next, 6000)
     return () => clearInterval(autoplayRef.current)
-  }, [next])
+  }, [next, isHovering, detailProject])
 
   const resetAutoplay = useCallback(() => {
     clearInterval(autoplayRef.current)
-    autoplayRef.current = setInterval(next, 6000)
-  }, [next])
+    if (!isHovering && !detailProject) {
+      autoplayRef.current = setInterval(next, 6000)
+    }
+  }, [next, isHovering, detailProject])
 
   const handleNav = useCallback((fn) => () => { fn(); resetAutoplay() }, [resetAutoplay])
   const handleThumbClick = useCallback((i) => { goTo(i); resetAutoplay() }, [goTo, resetAutoplay])
@@ -432,17 +502,24 @@ export default function Projects() {
   const touchEndX = useRef(0)
 
   const handleTouchStart = (e) => {
+    // Don't track swipe if it started on an interactive element
+    if (swipeBlocked.current) return
     touchStartX.current = e.targetTouches[0].clientX
     touchEndX.current = e.targetTouches[0].clientX
   }
 
   const handleTouchMove = (e) => {
+    if (swipeBlocked.current) return
     touchEndX.current = e.targetTouches[0].clientX
   }
 
   const handleTouchEnd = () => {
+    if (swipeBlocked.current) {
+      swipeBlocked.current = false
+      return
+    }
     const diff = touchStartX.current - touchEndX.current
-    const threshold = 50
+    const threshold = 60 // Slightly higher threshold to reduce false triggers
     if (Math.abs(diff) > threshold) {
       if (diff > 0) {
         next()
@@ -453,6 +530,17 @@ export default function Projects() {
       }
     }
   }
+
+  // Handler for "View Details" that blocks swipe and opens detail
+  const handleViewDetails = useCallback((e) => {
+    e.stopPropagation()
+    e.preventDefault()
+    swipeBlocked.current = true
+    // Capture the project at click time to avoid stale closures
+    const projectToShow = PROJECTS[activeIndex]
+    setDetailProject(projectToShow)
+    clearInterval(autoplayRef.current)
+  }, [activeIndex])
 
   // Keyboard navigation
   useEffect(() => {
@@ -521,7 +609,13 @@ export default function Projects() {
         <SideTitle title={current.title} color={current.color} />
 
         {/* ── Center content ── */}
-        <div className="absolute inset-0 z-[3] flex items-center justify-center">
+        <div
+          className="absolute inset-0 z-[3] flex items-center justify-center"
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+          onFocus={() => setIsHovering(true)}
+          onBlur={() => setIsHovering(false)}
+        >
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
               key={`content-${activeIndex}`}
@@ -569,15 +663,22 @@ export default function Projects() {
                 {current.shortDesc}
               </p>
 
-              {/* "View Details" button */}
+              {/* "View Details" button — isolated from swipe/carousel */}
               <motion.button
-                onClick={() => { setDetailProject(current); clearInterval(autoplayRef.current) }}
+                ref={viewDetailsRef}
+                onClick={handleViewDetails}
+                onPointerDown={(e) => { e.stopPropagation(); swipeBlocked.current = true }}
+                onTouchStart={(e) => { e.stopPropagation(); swipeBlocked.current = true }}
+                onTouchEnd={(e) => { e.stopPropagation() }}
                 className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-7 sm:py-3 rounded-full font-manrope font-semibold text-[11px] sm:text-sm"
                 style={{
                   background: 'rgb(var(--bg-primary) / 0.3)',
                   border: '1px solid rgb(var(--text-primary) / 0.2)',
                   color: 'rgb(var(--text-primary))',
                   backdropFilter: 'blur(8px)',
+                  position: 'relative',
+                  zIndex: 10,
+                  touchAction: 'manipulation',
                 }}
                 whileHover={{
                   scale: 1.05,
@@ -655,6 +756,7 @@ export default function Projects() {
           <DetailPanel
             project={detailProject}
             onClose={() => { setDetailProject(null); resetAutoplay() }}
+            triggerRef={viewDetailsRef}
           />
         )}
       </AnimatePresence>
