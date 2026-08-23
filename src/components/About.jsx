@@ -204,11 +204,11 @@ const CURRENT_PROJECTS = [
     color: 'rgb(52,211,153)',
   },
   {
-    name: 'Project 2',
-    emoji: '🔬',
-    desc: 'Details coming soon — stay tuned for updates.',
+    name: 'ArchaeoNet',
+    emoji: '📜',
+    desc: 'AI-powered model designed to reconstruct and predict lost ancient information and historical texts using deep learning.',
     status: 'Planning',
-    tags: ['ML', 'Research'],
+    tags: ['AI/ML', 'Research', 'NLP'],
     color: 'rgb(167,139,250)',
   },
 ]
