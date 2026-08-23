@@ -83,7 +83,7 @@ function NavButton({ direction, onClick }) {
   return (
     <motion.button
       onClick={onClick}
-      className="relative w-14 h-14 rounded-full flex items-center justify-center"
+      className="relative w-14 h-14 lg:w-16 lg:h-16 rounded-full flex items-center justify-center"
       style={{ background: 'transparent' }}
       whileHover={{ scale: 1.12 }}
       whileTap={{ scale: 0.93 }}
@@ -92,7 +92,7 @@ function NavButton({ direction, onClick }) {
       {/* Animated ring */}
       <motion.svg
         width="56" height="56" viewBox="0 0 56 56"
-        className="absolute inset-0"
+        className="absolute inset-0 w-full h-full"
         whileHover={{ rotate: 360 }}
         transition={{ rotate: { duration: 8, ease: 'linear', repeat: Infinity } }}
       >
@@ -144,8 +144,9 @@ function DetailPanel({ project, onClose }) {
         <div className="relative h-52 sm:h-64 overflow-hidden rounded-t-2xl">
           <img
             src={project.image}
-            alt={project.title}
+            alt={`${project.title} screenshot`}
             className="w-full h-full object-cover"
+            loading="lazy"
           />
           <div
             className="absolute inset-0"
@@ -154,7 +155,7 @@ function DetailPanel({ project, onClose }) {
           {/* Close button */}
           <motion.button
             onClick={onClose}
-            className="absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center"
+            className="absolute top-4 right-4 w-11 h-11 rounded-full flex items-center justify-center"
             style={{
               background: 'rgb(var(--bg-primary) / 0.5)',
               border: '1px solid rgb(var(--text-primary) / 0.15)',
@@ -162,6 +163,7 @@ function DetailPanel({ project, onClose }) {
             }}
             whileHover={{ scale: 1.1, background: 'rgb(var(--text-primary) / 0.15)' }}
             whileTap={{ scale: 0.9 }}
+            aria-label="Close project details"
           >
             <X size={16} />
           </motion.button>
@@ -190,19 +192,19 @@ function DetailPanel({ project, onClose }) {
           {/* Metadata */}
           <p
             className="font-mono text-xs tracking-wider mb-5"
-            style={{ color: 'rgb(var(--text-primary) / 0.4)' }}
+            style={{ color: 'rgb(var(--text-primary) / 0.6)' }}
           >
             {project.metadata}
           </p>
 
           {/* Long description */}
-          <p className="font-manrope text-base leading-relaxed mb-7" style={{ color: 'rgb(var(--text-primary) / 0.75)' }}>
+          <p className="font-manrope text-base leading-relaxed mb-7" style={{ color: 'rgb(var(--text-primary) / 0.8)' }}>
             {project.longDesc}
           </p>
 
           {/* Features grid */}
           <div className="mb-7">
-            <span className="font-mono text-xs tracking-widest uppercase block mb-4" style={{ color: 'rgb(var(--text-primary) / 0.4)' }}>
+            <span className="font-mono text-xs tracking-widest uppercase block mb-4" style={{ color: 'rgb(var(--text-primary) / 0.55)' }}>
               Key Features
             </span>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -216,7 +218,7 @@ function DetailPanel({ project, onClose }) {
                   style={{ background: `${project.color}0A`, border: `1px solid ${project.color}18` }}
                 >
                   <Icon size={15} style={{ color: project.color, flexShrink: 0 }} />
-                  <span className="font-manrope text-sm" style={{ color: 'rgb(var(--text-primary) / 0.8)' }}>{label}</span>
+                  <span className="font-manrope text-sm" style={{ color: 'rgb(var(--text-primary) / 0.85)' }}>{label}</span>
                 </motion.div>
               ))}
             </div>
@@ -224,7 +226,7 @@ function DetailPanel({ project, onClose }) {
 
           {/* Tech stack */}
           <div className="mb-8">
-            <span className="font-mono text-xs tracking-widest uppercase block mb-3" style={{ color: 'rgb(var(--text-primary) / 0.4)' }}>
+            <span className="font-mono text-xs tracking-widest uppercase block mb-3" style={{ color: 'rgb(var(--text-primary) / 0.55)' }}>
               Tech Stack
             </span>
             <div className="flex flex-wrap gap-2">
@@ -341,24 +343,26 @@ function ThumbnailStrip({ projects, activeIndex, onSelect }) {
             onClick={() => onSelect(i)}
             className="relative rounded-2xl overflow-hidden"
             style={{
-              width: 160, height: 96,
+              width: 200, height: 120,
               border: '1px solid rgb(var(--text-primary) / 0.07)',
               boxShadow: 'inset 0 1px 4px rgb(var(--bg-primary) / 0.3)',
             }}
             whileHover={{ scale: 1.06, borderColor: 'rgb(var(--text-primary) / 0.2)' }}
             whileTap={{ scale: 0.97 }}
+            aria-label={`View ${proj.title} project`}
           >
             <img
               src={proj.image}
               alt={proj.title}
               className="w-full h-full object-cover"
+              loading="lazy"
             />
             {/* Title overlay */}
             <div
-              className="absolute inset-0 flex items-end p-2"
+              className="absolute inset-0 flex items-end p-2.5"
               style={{ background: 'linear-gradient(to top, rgb(var(--bg-primary) / 0.65) 0%, transparent 60%)' }}
             >
-              <span className="font-mono text-[10px] text-text-primary/80 truncate">{proj.title}</span>
+              <span className="font-mono text-[11px] text-text-primary/80 truncate">{proj.title}</span>
             </div>
           </motion.button>
         )
@@ -372,7 +376,7 @@ function Counter({ active, total }) {
   return (
     <div
       className="absolute top-4 right-14 sm:top-8 sm:right-8 z-[5] font-mono text-[10px] sm:text-xs"
-      style={{ color: 'rgb(var(--text-primary) / 0.5)', letterSpacing: '0.08em' }}
+      style={{ color: 'rgb(var(--text-primary) / 0.6)', letterSpacing: '0.08em' }}
     >
       {String(active + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
     </div>
@@ -504,7 +508,7 @@ export default function Projects() {
         <div className="absolute top-4 left-4 sm:top-8 sm:left-8 z-[5]">
           <span
             className="font-mono text-[10px] sm:text-[11px] tracking-wider"
-            style={{ color: 'rgb(var(--text-primary) / 0.5)' }}
+            style={{ color: 'rgb(var(--text-primary) / 0.6)' }}
           >
             {current.metadata}
           </span>
@@ -526,7 +530,7 @@ export default function Projects() {
               animate="center"
               exit="exit"
               transition={{ duration: 0.7, ease: EASE }}
-              className="text-center px-4 py-4 sm:px-6 sm:py-6 max-w-[88vw] sm:max-w-xl w-full rounded-2xl"
+              className="text-center px-4 py-4 sm:px-6 sm:py-6 max-w-[88vw] sm:max-w-xl lg:max-w-2xl w-full rounded-2xl"
               style={{
                 background: 'rgb(var(--bg-primary) / 0.5)',
                 backdropFilter: 'blur(20px)',
@@ -544,7 +548,7 @@ export default function Projects() {
 
               {/* Title */}
               <h1
-                className="font-syne font-extrabold text-xl sm:text-3xl lg:text-[2rem] uppercase leading-tight sm:leading-none mb-2 sm:mb-4"
+                className="font-syne font-extrabold text-xl sm:text-3xl lg:text-[2.75rem] uppercase leading-tight sm:leading-none mb-2 sm:mb-4"
                 style={{
                   color: 'rgb(var(--text-primary))',
                   textShadow: '0 4px 40px rgb(var(--bg-primary) / 0.6)',
@@ -556,9 +560,9 @@ export default function Projects() {
 
               {/* Short description */}
               <p
-                className="font-manrope text-[11px] sm:text-sm max-w-sm mx-auto mb-3 sm:mb-5 leading-relaxed"
+                className="font-manrope text-[11px] sm:text-sm lg:text-base max-w-sm lg:max-w-md mx-auto mb-3 sm:mb-5 leading-relaxed"
                 style={{
-                  color: 'rgb(var(--text-primary) / 0.75)',
+                  color: 'rgb(var(--text-primary) / 0.8)',
                   textShadow: '0 1px 8px rgb(var(--bg-primary) / 0.3)',
                 }}
               >
@@ -568,7 +572,7 @@ export default function Projects() {
               {/* "View Details" button */}
               <motion.button
                 onClick={() => { setDetailProject(current); clearInterval(autoplayRef.current) }}
-                className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full font-manrope font-semibold text-[11px] sm:text-xs"
+                className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-7 sm:py-3 rounded-full font-manrope font-semibold text-[11px] sm:text-sm"
                 style={{
                   background: 'rgb(var(--bg-primary) / 0.3)',
                   border: '1px solid rgb(var(--text-primary) / 0.2)',
@@ -596,7 +600,7 @@ export default function Projects() {
                     style={{
                       background: 'rgb(var(--text-primary) / 0.08)',
                       border: '1px solid rgb(var(--text-primary) / 0.12)',
-                      color: 'rgb(var(--text-primary) / 0.6)',
+                      color: 'rgb(var(--text-primary) / 0.7)',
                     }}
                   >
                     {t}

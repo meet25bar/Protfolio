@@ -24,13 +24,18 @@ export default function MobileNavbar() {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         onClick={toggle}
-        className="fixed top-4 right-4 z-50 p-2.5 rounded-full border glass-card"
+        className="fixed top-4 right-4 z-50 rounded-full border glass-card focus-visible:ring-2 focus-visible:ring-accent-cyan"
         style={{
+          width: 44,
+          height: 44,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
           backgroundColor: isDark ? 'rgba(12, 22, 40, 0.7)' : 'rgba(255, 255, 255, 0.7)',
           borderColor: isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
           backdropFilter: 'blur(12px)',
         }}
-        aria-label="Toggle Theme"
+        aria-label={`Switch to ${isDark ? 'light' : 'dark'} theme`}
       >
         {isDark ? (
           <Sun size={18} color="rgba(251, 191, 36, 1)" />
@@ -55,7 +60,7 @@ export default function MobileNavbar() {
           paddingBottom: 'env(safe-area-inset-bottom, 0px)',
         }}
       >
-        <div className="flex justify-around items-center px-1 py-2">
+        <div className="flex justify-around items-center px-1 py-1.5">
           {NAV_LINKS.map((link) => {
             const isActive = location.pathname === link.path;
             const Icon = link.icon;
@@ -63,11 +68,13 @@ export default function MobileNavbar() {
               <button
                 key={link.path}
                 onClick={() => navigate(link.path)}
-                className="flex flex-col items-center justify-center w-full relative py-1"
+                className="flex flex-col items-center justify-center relative"
+                style={{ minWidth: 44, minHeight: 44 }}
                 aria-label={link.label}
+                aria-current={isActive ? 'page' : undefined}
               >
                 <div
-                  className={`p-1.5 rounded-xl transition-colors duration-300 ${
+                  className={`p-2 rounded-xl transition-colors duration-300 ${
                     isActive
                       ? isDark
                         ? 'bg-white/10'
@@ -84,22 +91,22 @@ export default function MobileNavbar() {
                           ? '#00d4ff'
                           : '#0284c7'
                         : isDark
-                        ? 'rgba(255,255,255,0.45)'
-                        : 'rgba(15,23,42,0.45)',
+                        ? 'rgba(255,255,255,0.55)'
+                        : 'rgba(15,23,42,0.55)',
                       filter: isActive ? 'drop-shadow(0 0 6px rgba(0,212,255,0.3))' : 'none',
                     }}
                   />
                 </div>
                 <span
-                  className="text-[9px] mt-0.5 font-medium tracking-wide transition-colors duration-300"
+                  className="text-[10px] mt-0.5 font-medium tracking-wide transition-colors duration-300"
                   style={{
                     color: isActive
                       ? isDark
                         ? '#00d4ff'
                         : '#0284c7'
                       : isDark
-                      ? 'rgba(255,255,255,0.45)'
-                      : 'rgba(15,23,42,0.45)',
+                      ? 'rgba(255,255,255,0.55)'
+                      : 'rgba(15,23,42,0.55)',
                   }}
                 >
                   {link.label}

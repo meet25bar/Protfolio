@@ -257,10 +257,11 @@ function PhotoCard() {
         {/* Photo */}
         <img
           src={meetPhoto}
-          alt="Meet Barot"
+          alt="Meet Barot — AI/ML Engineer"
           className="w-full h-full object-cover object-top select-none"
           style={{ borderRadius: 18 }}
           draggable={false}
+          loading="lazy"
         />
 
         {/* Shine overlay on hover */}
@@ -401,7 +402,7 @@ function SkillsPanel() {
                       }
                     >
                       {SKILL_LOGOS[skill] && (
-                        <img src={SKILL_LOGOS[skill]} alt={skill} className="w-4 h-4" style={{ filter: 'drop-shadow(0 0 2px rgba(255,255,255,0.15))' }} />
+                        <img src={SKILL_LOGOS[skill]} alt={skill} className="w-4 h-4" loading="lazy" style={{ filter: 'drop-shadow(0 0 2px rgba(255,255,255,0.15))' }} />
                       )}
                       {skill}
                     </motion.span>
@@ -488,7 +489,7 @@ function CodingStatsPanel() {
             </svg>
             <div className="absolute inset-0 flex flex-col items-center justify-center">
               <span className="font-syne font-bold text-xl text-text-primary">{LEETCODE_STATS.solved}</span>
-              <span className="font-mono text-[9px] text-text-muted">/ {LEETCODE_STATS.total}</span>
+              <span className="font-mono text-[10px] text-text-muted">/ {LEETCODE_STATS.total}</span>
             </div>
           </div>
           <div className="space-y-3 flex-1">
@@ -557,7 +558,7 @@ function CodingStatsPanel() {
             >
               <s.icon size={14} className="mx-auto mb-1" style={{ color: s.color }} />
               <div className="font-syne font-bold text-lg text-text-primary">{s.value}</div>
-              <div className="font-mono text-[9px] text-text-muted uppercase tracking-wider">{s.label}</div>
+              <div className="font-mono text-[10px] text-text-muted uppercase tracking-wider">{s.label}</div>
             </div>
           ))}
         </div>

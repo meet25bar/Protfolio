@@ -139,7 +139,7 @@ function DockIcon({ mouseX, icon: Icon, label, isActive, isDark, onClick, glowCo
       <motion.button
         onClick={onClick}
         whileTap={{ scale: 0.88 }}
-        className="w-full h-full rounded-2xl flex items-center justify-center relative overflow-hidden cursor-pointer border transition-colors duration-200 z-10"
+        className="w-full h-full rounded-2xl flex items-center justify-center relative overflow-hidden cursor-pointer border transition-colors duration-200 z-10 focus-visible:ring-2 focus-visible:ring-accent-cyan"
         style={{
           backgroundColor: isActive
             ? isDark
@@ -257,7 +257,7 @@ function DockProfile({ mouseX, isDark, onClick }) {
       <motion.button
         onClick={onClick}
         whileTap={{ scale: 0.88 }}
-        className="w-full h-full rounded-2xl overflow-hidden cursor-pointer relative border p-0.5 transition-all duration-300 z-10"
+        className="w-full h-full rounded-2xl overflow-hidden cursor-pointer relative border p-0.5 transition-all duration-300 z-10 focus-visible:ring-2 focus-visible:ring-accent-cyan"
         style={{
           borderColor: hovered
             ? isDark ? 'rgba(0,212,255,0.6)' : 'rgba(109,40,217,0.5)'
@@ -343,7 +343,7 @@ function DockThemeToggle({ mouseX, isDark, toggle }) {
       <motion.button
         onClick={toggle}
         whileTap={{ scale: 0.88 }}
-        className="w-full h-full rounded-2xl flex items-center justify-center relative overflow-hidden cursor-pointer border z-10"
+        className="w-full h-full rounded-2xl flex items-center justify-center relative overflow-hidden cursor-pointer border z-10 focus-visible:ring-2 focus-visible:ring-accent-cyan"
         style={{
           backgroundColor: 'rgb(var(--text-primary) / 0.01)',
           borderColor: isDark ? 'rgb(var(--text-primary) / 0.04)' : 'rgba(0, 0, 0, 0.04)',

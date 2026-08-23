@@ -127,9 +127,10 @@ export default function Hero() {
       id="hero"
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className={`relative min-h-screen flex flex-col items-center justify-center overflow-hidden pb-32 pt-8 sm:pt-12 md:pb-0 md:pt-0 ${
+      className={`relative flex flex-col items-center justify-center overflow-hidden pb-36 pt-8 sm:pt-12 md:pb-0 md:pt-0 ${
         webglSupported ? '' : 'grid-bg'
       }`}
+      style={{ minHeight: '100svh' }}
     >
       {/* Lightspeed shader */}
       <Lightspeed onWebGLInitResult={setWebglSupported} />
@@ -156,17 +157,18 @@ export default function Hero() {
         style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
       >
         {/* Availability badge */}
-        <motion.div variants={itemVariants} className="flex justify-center mb-3 sm:mb-5 md:mb-6">
+        <motion.div variants={itemVariants} className="flex justify-center mb-3 sm:mb-5 md:mb-6 px-2 sm:px-0">
           <span
-            className="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-[11px] sm:text-sm font-mono font-medium"
+            className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 py-1.5 sm:px-3.5 sm:py-1.5 rounded-full text-[9px] sm:text-sm font-mono font-medium text-center"
             style={{
               background: 'rgb(var(--accent-cyan) / 0.1)',
               border: '1px solid rgb(var(--accent-cyan) / 0.35)',
               color: 'rgb(var(--accent-cyan))',
+              maxWidth: 'calc(100vw - 2rem)',
             }}
           >
-            <span className="glow-dot" />
-            Open to Internships &amp; SDE Roles
+            <span className="glow-dot shrink-0" />
+            <span className="leading-snug whitespace-nowrap">Open to Internships &amp; SDE Roles</span>
           </span>
         </motion.div>
 
@@ -257,7 +259,7 @@ export default function Hero() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
-              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-200"
+              className="w-11 h-11 rounded-full flex items-center justify-center transition-all duration-200"
               style={{
                 border: '1px solid rgb(var(--text-primary) / 0.18)',
                 color: 'rgb(var(--text-secondary))',
@@ -265,7 +267,7 @@ export default function Hero() {
               whileHover={{ scale: 1.15, y: -2 }}
               whileTap={{ scale: 0.9 }}
             >
-              <Icon size={15} className="sm:w-[17px] sm:h-[17px]" />
+              <Icon size={17} />
             </motion.a>
           ))}
         </motion.div>

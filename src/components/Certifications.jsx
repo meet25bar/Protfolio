@@ -119,15 +119,29 @@ function CertCard({ cert, index }) {
             <CheckCircle size={12} style={{ color: cert.color }} />
             Verified
           </span>
-          <motion.a
-            href={cert.credential}
-            className="flex items-center gap-1 font-mono text-xs hover:text-text-primary transition-colors"
-            style={{ color: cert.color }}
-            whileHover={{ x: 2 }}
-          >
-            View Credential
-            <ExternalLink size={11} />
-          </motion.a>
+          {cert.credential && cert.credential !== '#' ? (
+            <motion.a
+              href={cert.credential}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 font-mono text-xs hover:text-text-primary transition-colors"
+              style={{ color: cert.color }}
+              whileHover={{ x: 2 }}
+              aria-label={`View credential for ${cert.title}`}
+            >
+              View Credential
+              <ExternalLink size={11} />
+            </motion.a>
+          ) : (
+            <span
+              className="flex items-center gap-1 font-mono text-xs cursor-not-allowed select-none"
+              style={{ color: 'rgb(var(--text-muted))', opacity: 0.7 }}
+              aria-disabled="true"
+              title="Credential link coming soon"
+            >
+              Credential Coming Soon
+            </span>
+          )}
         </div>
       </motion.div>
     </ScrollReveal>

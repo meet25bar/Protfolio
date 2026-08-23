@@ -42,7 +42,7 @@ function Field({ label, id, type = 'text', placeholder, value, onChange, textare
     <div className="mb-5">
       <label htmlFor={id} className="block font-manrope text-sm font-medium text-text-secondary mb-2">
         {label}
-        {required && <span className="text-red-400 ml-1">*</span>}
+        {required && <span className="text-red-400 ml-1" aria-hidden="true">*</span>}
       </label>
       {textarea ? (
         <textarea
@@ -52,7 +52,8 @@ function Field({ label, id, type = 'text', placeholder, value, onChange, textare
           value={value}
           onChange={onChange}
           required={required}
-          className="w-full bg-surface rounded-xl border border-surface-border px-4 py-3 font-manrope text-text-primary text-sm placeholder:text-text-muted resize-none focus:outline-none focus:border-accent-cyan/50 focus:bg-surface-hover transition-all duration-200"
+          className="w-full bg-surface rounded-xl border border-surface-border px-4 py-3 font-manrope text-text-primary text-sm placeholder:text-text-muted resize-none focus:outline-none focus:border-accent-cyan/50 focus:bg-surface-hover focus-visible:ring-2 focus-visible:ring-accent-cyan transition-all duration-200"
+          style={{ scrollMarginBottom: 100 }}
         />
       ) : (
         <input
@@ -62,7 +63,9 @@ function Field({ label, id, type = 'text', placeholder, value, onChange, textare
           value={value}
           onChange={onChange}
           required={required}
-          className="w-full bg-surface rounded-xl border border-surface-border px-4 py-3 font-manrope text-text-primary text-sm placeholder:text-text-muted focus:outline-none focus:border-accent-cyan/50 focus:bg-surface-hover transition-all duration-200"
+          autoComplete={type === 'email' ? 'email' : id === 'name' ? 'name' : undefined}
+          className="w-full bg-surface rounded-xl border border-surface-border px-4 py-3 font-manrope text-text-primary text-sm placeholder:text-text-muted focus:outline-none focus:border-accent-cyan/50 focus:bg-surface-hover focus-visible:ring-2 focus-visible:ring-accent-cyan transition-all duration-200"
+          style={{ scrollMarginBottom: 100 }}
         />
       )}
     </div>

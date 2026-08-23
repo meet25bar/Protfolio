@@ -14,8 +14,8 @@
 
   /* ── Dark mode text ── */
   --text-primary:   242 244 248;   /* #F2F4F8 — near white, warm */
-  --text-secondary: 156 163 180;   /* #9CA3B4 — muted slate */
-  --text-muted:     90  99  120;   /* #5A6378 — very muted */
+  --text-secondary: 170 177 194;   /* #AAB1C2 — muted slate (bumped for AA contrast) */
+  --text-muted:     120 129 150;   /* #788196 — muted (bumped from #5A6378 for 4.5:1) */
 
   /* ── Accents (softer, more premium) ── */
   --accent-cyan:    99  179 237;   /* #63B3ED — sky blue */
@@ -444,4 +444,56 @@ html.light textarea:focus {
 
 .animate-grain {
   animation: grain 0.4s steps(10) infinite;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   ACCESSIBILITY — Focus-visible states
+══════════════════════════════════════════════════════════════ */
+*:focus-visible {
+  outline: 2px solid rgb(var(--accent-cyan));
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid rgb(var(--accent-cyan));
+  outline-offset: 2px;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   REDUCED MOTION — prefers-reduced-motion
+══════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.15s !important;
+    scroll-behavior: auto !important;
+  }
+
+  .orb {
+    animation: none !important;
+  }
+
+  .cursor-blink {
+    animation: none !important;
+    opacity: 1;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   NARROW SCREEN FIXES — 320–375px
+══════════════════════════════════════════════════════════════ */
+@media (max-width: 375px) {
+  .section-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* ── Form scroll-margin so focused fields clear bottom nav ── */
+input:focus,
+textarea:focus {
+  scroll-margin-bottom: 100px;
 }
