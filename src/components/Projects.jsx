@@ -532,15 +532,13 @@ export default function Projects() {
   }
 
   // Handler for "View Details" that blocks swipe and opens detail
-  const handleViewDetails = useCallback((e) => {
+  const handleViewDetails = useCallback((e, projectToShow) => {
     e.stopPropagation()
     e.preventDefault()
     swipeBlocked.current = true
-    // Capture the project at click time to avoid stale closures
-    const projectToShow = PROJECTS[activeIndex]
-    setDetailProject(projectToShow)
     clearInterval(autoplayRef.current)
-  }, [activeIndex])
+    setDetailProject(projectToShow)
+  }, [])
 
   // Keyboard navigation
   useEffect(() => {
@@ -611,9 +609,9 @@ export default function Projects() {
         {/* ── Center content ── */}
         <div
           className="absolute inset-0 z-[3] flex items-center justify-center"
-          onMouseEnter={() => setIsHovering(true)}
+          onMouseEnter={() => { setIsHovering(true); clearInterval(autoplayRef.current); }}
           onMouseLeave={() => setIsHovering(false)}
-          onFocus={() => setIsHovering(true)}
+          onFocus={() => { setIsHovering(true); clearInterval(autoplayRef.current); }}
           onBlur={() => setIsHovering(false)}
         >
           <AnimatePresence mode="wait" custom={direction}>
@@ -666,10 +664,13 @@ export default function Projects() {
               {/* "View Details" button — isolated from swipe/carousel */}
               <motion.button
                 ref={viewDetailsRef}
-                onClick={handleViewDetails}
-                onPointerDown={(e) => { e.stopPropagation(); swipeBlocked.current = true }}
-                onTouchStart={(e) => { e.stopPropagation(); swipeBlocked.current = true }}
+                onClick={(e) => handleViewDetails(e, current)}
+                onPointerDown={(e) => { e.stopPropagation(); swipeBlocked.current = true; clearInterval(autoplayRef.current); }}
+                onTouchStart={(e) => { e.stopPropagation(); swipeBlocked.current = true; clearInterval(autoplayRef.current); }}
                 onTouchEnd={(e) => { e.stopPropagation() }}
+                onFocus={() => { setIsHovering(true); clearInterval(autoplayRef.current); }}
+                onMouseEnter={() => { setIsHovering(true); clearInterval(autoplayRef.current); }}
+                onMouseLeave={() => setIsHovering(false)}
                 className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-7 sm:py-3 rounded-full font-manrope font-semibold text-[11px] sm:text-sm"
                 style={{
                   background: 'rgb(var(--bg-primary) / 0.3)',
