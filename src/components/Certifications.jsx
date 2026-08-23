@@ -7,49 +7,99 @@ import ScrollReveal from './ScrollReveal'
 // ─── Certifications data ───────────────────────────────────────
 const CERTS = [
   {
-    title: 'Oracle OCI 2025 Generative AI Professional',
+    title: 'Oracle Cloud Infrastructure 2025 Certified Generative AI Professional',
     issuer: 'Oracle Cloud Infrastructure',
-    date: '2025',
+    date: 'Nov 2025',
     color: '#f59e0b',
     icon: '☁️',
     id: 'oci-genai',
-    credential: '#',
-    tags: ['LLMs', 'RAG', 'Vector DBs', 'OCI Deployment'],
+    credential: '/certs/gen ai professional.pdf',
+    tags: ['LLMs', 'Generative AI', 'OCI'],
   },
   {
-    title: 'Oracle OCI 2025 AI Foundations Associate',
-    issuer: 'Oracle Cloud Infrastructure',
-    date: '2025',
-    color: '#00d4ff',
-    icon: '🤖',
-    id: 'oci-ai',
-    credential: '#',
-    tags: ['AI', 'ML', 'DL Fundamentals', 'Cloud Services'],
-  },
-  {
-    title: 'Deep Learning A-Z [2026]',
-    issuer: 'Udemy',
+    title: 'Artificial Intelligence',
+    issuer: '30DaysCoding',
     date: '2026',
     color: '#10d9a0',
     icon: '🧠',
-    id: 'dl-az',
-    credential: '#',
-    tags: ['Deep Learning', 'Neural Networks', 'TensorFlow', 'PyTorch'],
+    id: '30days-ai',
+    credential: '/certs/30dayscoding AI.png',
+    tags: ['Artificial Intelligence', 'Machine Learning'],
+  },
+  {
+    title: 'Data Analytics',
+    issuer: '30DaysCoding',
+    date: '2026',
+    color: '#0ea5e9',
+    icon: '📊',
+    id: '30days-da',
+    credential: '/certs/30dayscoding Data.png',
+    tags: ['Data Analytics', 'Data Science'],
+  },
+  {
+    title: 'Java Development',
+    issuer: '30DaysCoding',
+    date: '2026',
+    color: '#eab308',
+    icon: '☕',
+    id: '30days-java',
+    credential: '/certs/30dayscoding Java.png',
+    tags: ['Java', 'Software Development'],
+  },
+  {
+    title: 'Data Structures And Algorithms',
+    issuer: '30DaysCoding',
+    date: '2026',
+    color: '#8b5cf6',
+    icon: '💻',
+    id: '30days-dsa',
+    credential: '/certs/30dayscoding DSA.png',
+    tags: ['DSA', 'Algorithms', 'Problem Solving'],
+  },
+  {
+    title: 'Deep Learning A-Z [2026]: DL, AI in Python & AWS + LLM Prize',
+    issuer: 'Udemy',
+    date: 'Aug 2026',
+    color: '#10d9a0',
+    icon: '🧠',
+    id: 'dl-az-2026',
+    credential: '/certs/udemy dl a-z.pdf',
+    tags: ['Deep Learning', 'Python', 'AWS', 'LLMs'],
   },
   {
     title: 'Python for Data Science and Machine Learning Bootcamp',
     issuer: 'Udemy',
-    date: '2026',
+    date: 'May 2026',
     color: '#eab308',
     icon: '🐍',
     id: 'python-ds-ml',
-    credential: '#',
+    credential: '/certs/udemy python for data science.pdf',
     tags: ['Python', 'Data Science', 'Machine Learning', 'Pandas'],
   },
   {
-    title: 'FastAPI – The Complete Course 2026',
+    title: 'Machine Learning A-Z: AI, Python & R + ChatGPT Prize [2026]',
     issuer: 'Udemy',
-    date: '2026',
+    date: 'Mar 2026',
+    color: '#f43f5e',
+    icon: '🤖',
+    id: 'ml-az-2026',
+    credential: '/certs/udemy ml a-z.pdf',
+    tags: ['Machine Learning', 'AI', 'Python', 'R'],
+  },
+  {
+    title: 'Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate',
+    issuer: 'Oracle Cloud Infrastructure',
+    date: 'Oct 2025',
+    color: '#00d4ff',
+    icon: '☁️',
+    id: 'oci-ai',
+    credential: '/certs/Oracle Certificate.pdf',
+    tags: ['AI Fundamentals', 'OCI', 'Machine Learning'],
+  },
+  {
+    title: 'FastAPI – The Complete Course',
+    issuer: 'Udemy',
+    date: 'Coming Soon',
     color: '#0ea5e9',
     icon: '⚡',
     id: 'fastapi',
@@ -63,7 +113,7 @@ function CertCard({ cert, index }) {
   return (
     <ScrollReveal variant="scale" delay={index * 0.12}>
       <motion.div
-        className="glass-card p-5 sm:p-7 relative overflow-hidden h-full"
+        className="glass-card p-5 sm:p-7 relative overflow-hidden h-full flex flex-col"
         whileHover={{ y: -6, boxShadow: `0 30px 60px rgba(0,0,0,0.4), 0 0 40px ${cert.color}12` }}
         transition={{ duration: 0.3 }}
       >
@@ -114,7 +164,7 @@ function CertCard({ cert, index }) {
         </div>
 
         {/* Verified badge + link */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mt-auto pt-4">
           <span className="flex items-center gap-1.5 font-mono text-xs text-text-muted">
             <CheckCircle size={12} style={{ color: cert.color }} />
             Verified
