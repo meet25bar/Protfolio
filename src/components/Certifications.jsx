@@ -23,7 +23,7 @@ const CERTS = [
     color: '#10d9a0',
     icon: '🧠',
     id: '30days-ai',
-    credential: '/certs/30dayscoding AI.png',
+    credential: '/certs/Meet_Barot_certificate AI.png',
     tags: ['Artificial Intelligence', 'Machine Learning'],
   },
   {
@@ -33,7 +33,7 @@ const CERTS = [
     color: '#0ea5e9',
     icon: '📊',
     id: '30days-da',
-    credential: '/certs/30dayscoding Data.png',
+    credential: '/certs/Meet_Barot_certificate Data.png',
     tags: ['Data Analytics', 'Data Science'],
   },
   {
@@ -43,7 +43,7 @@ const CERTS = [
     color: '#eab308',
     icon: '☕',
     id: '30days-java',
-    credential: '/certs/30dayscoding Java.png',
+    credential: '/certs/Meet_Barot_certificate java.png',
     tags: ['Java', 'Software Development'],
   },
   {
@@ -53,7 +53,7 @@ const CERTS = [
     color: '#8b5cf6',
     icon: '💻',
     id: '30days-dsa',
-    credential: '/certs/30dayscoding DSA.png',
+    credential: '/certs/Meet_Barot_certificate DSA.png',
     tags: ['DSA', 'Algorithms', 'Problem Solving'],
   },
   {
@@ -83,7 +83,7 @@ const CERTS = [
     color: '#f43f5e',
     icon: '🤖',
     id: 'ml-az-2026',
-    credential: '/certs/udemy ml a-z.pdf',
+    credential: '/certs/udemy.pdf',
     tags: ['Machine Learning', 'AI', 'Python', 'R'],
   },
   {

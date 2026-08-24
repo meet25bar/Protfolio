@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { ThemeProvider } from './context/ThemeContext'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import QuantumNodes from './components/QuantumNodes'
@@ -81,6 +81,7 @@ export default function App() {
                         </>
                       } />
                       <Route path="/contact" element={<Contact />} />
+                      <Route path="*" element={<Navigate to="/" replace />} />
                     </Routes>
                   </AnimatePresence>
                 </main>
