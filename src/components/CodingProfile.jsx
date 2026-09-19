@@ -9,7 +9,7 @@ import ScrollReveal from './ScrollReveal'
 const STATS = [
   {
     icon: Code2,
-    value: '290+',
+    value: '320+',
     label: 'Problems Solved',
     sub: 'LeetCode',
     color: '#f59e0b',
@@ -18,12 +18,12 @@ const STATS = [
     icon: Trophy,
     value: 'Top 15%',
     label: 'Global Rank',
-    sub: '504,089',
+    sub: '456,625',
     color: '#00d4ff',
   },
   {
     icon: Target,
-    value: '130+',
+    value: '140+',
     label: 'Medium Solved',
     sub: 'Strong concepts',
     color: '#10d9a0',
@@ -39,9 +39,9 @@ const STATS = [
 
 // ─── Difficulty breakdown ──────────────────────────────────────
 const DIFFICULTY = [
-  { label: 'Easy',   count: 142, total: 296, color: '#10d9a0' },
-  { label: 'Medium', count: 139, total: 296, color: '#f59e0b' },
-  { label: 'Hard',   count: 15, total: 296, color: '#ef4444' },
+  { label: 'Easy',   count: 162, total: 322, color: '#10d9a0' },
+  { label: 'Medium', count: 144, total: 322, color: '#f59e0b' },
+  { label: 'Hard',   count: 16, total: 322, color: '#ef4444' },
 ]
 
 // ─── Animated counter ─────────────────────────────────────────

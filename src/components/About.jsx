@@ -6,12 +6,11 @@ import {
   Brain, Code2, Database, Wrench, MapPin, Calendar,
   TrendingUp, Award, ChevronDown, ChevronUp,
   Download, Eye, ExternalLink, Instagram, Linkedin, Github,
-  BarChart3, Activity, Flame, Target,
+  BarChart3, Activity, Flame, Target, Mail, FileText
 } from 'lucide-react'
 import SectionHeader from './SectionHeader'
 import ScrollReveal from './ScrollReveal'
 import NovaGlow from './NovaGlow'
-import meetPhoto from './meet_photo.jpg'
 
 // Custom X (formerly Twitter) icon
 function XIcon({ size = 18, className = '' }) {
@@ -56,28 +55,29 @@ const MILESTONES = [
 // ─── Stats ─────────────────────────────────────────────────────
 const STATS = [
   { value: '9.17', label: 'CGPA'        },
-  { value: '290+', label: 'LeetCode'    },
+  { value: '320+', label: 'LeetCode'    },
   { value: '3',    label: 'Projects'    },
   { value: '4',    label: 'Experiences' },
 ]
 
 // ─── Social Links ──────────────────────────────────────────────
 const SOCIALS = [
-  { icon: Instagram, label: 'Instagram', url: 'https://www.instagram.com/meet.barot25', color: '#E1306C' },
-  { icon: Linkedin,  label: 'LinkedIn',  url: 'https://www.linkedin.com/in/meetbarot', color: '#0A66C2' },
   { icon: Github,    label: 'GitHub',    url: 'https://github.com/meet25bar', color: '#fff' },
+  { icon: Linkedin,  label: 'LinkedIn',  url: 'https://www.linkedin.com/in/meetbarot', color: '#0A66C2' },
+  { icon: Mail,      label: 'Email',     url: 'mailto:barotmeet25@gmail.com', color: '#EA4335' },
+  { icon: FileText,  label: 'Resume',    url: '/resume.pdf', color: '#34D399' },
   { icon: XIcon,     label: 'X',         url: 'https://x.com/BarotMeet23562', color: '#fff' },
 ]
 
 // ─── LeetCode Stats ────────────────────────────────────────────
 const LEETCODE_STATS = {
-  solved: 296,
-  total: 4029,
-  easy: { solved: 142, total: 960 },
-  medium: { solved: 139, total: 2103 },
-  hard: { solved: 15, total: 966 },
+  solved: 322,
+  total: 4055,
+  easy: { solved: 162, total: 965 },
+  medium: { solved: 144, total: 2115 },
+  hard: { solved: 16, total: 975 },
   submissions: 444,
-  activeDays: 283,
+  activeDays: 286,
   maxStreak: 48,
 }
 
@@ -212,99 +212,6 @@ const CURRENT_PROJECTS = [
     color: 'rgb(167,139,250)',
   },
 ]
-
-// ─── Photo Card with 3D tilt ────────────────────────────────────
-function PhotoCard() {
-  const [tilt, setTilt] = useState({ x: 0, y: 0 })
-  const [hovered, setHovered] = useState(false)
-
-  const handleMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect()
-    const cx = rect.left + rect.width / 2
-    const cy = rect.top + rect.height / 2
-    const dx = (e.clientX - cx) / (rect.width / 2)
-    const dy = (e.clientY - cy) / (rect.height / 2)
-    setTilt({ x: dy * -12, y: dx * 12 })
-  }
-
-  return (
-    <div
-      className="relative mx-auto w-[220px] h-[270px] md:w-[240px] md:h-[295px]"
-      style={{ perspective: 800 }}
-      onMouseMove={handleMove}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => { setHovered(false); setTilt({ x: 0, y: 0 }) }}
-    >
-      <motion.div
-        animate={{ rotateX: tilt.x, rotateY: tilt.y }}
-        transition={{ type: 'spring', stiffness: 180, damping: 22 }}
-        style={{ transformStyle: 'preserve-3d', borderRadius: 20, overflow: 'hidden', width: '100%', height: '100%' }}
-        className="relative"
-      >
-        {/* Gradient border ring */}
-        <div
-          className="absolute inset-0 rounded-[20px] z-10 pointer-events-none"
-          style={{
-            padding: 2,
-            background: 'linear-gradient(135deg, rgba(99,179,237,0.6), rgba(167,139,250,0.5), rgba(52,211,153,0.5))',
-            borderRadius: 20,
-            WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-            WebkitMaskComposite: 'xor',
-            maskComposite: 'exclude',
-          }}
-        />
-
-        {/* Photo */}
-        <img
-          src={meetPhoto}
-          alt="Meet Barot — AI/ML Engineer"
-          className="w-full h-full object-cover object-top select-none"
-          style={{ borderRadius: 18 }}
-          draggable={false}
-          loading="lazy"
-        />
-
-        {/* Shine overlay on hover */}
-        <motion.div
-          className="absolute inset-0 pointer-events-none"
-          style={{ borderRadius: 18 }}
-          animate={{ opacity: hovered ? 1 : 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <div
-            style={{
-              background: 'linear-gradient(135deg, rgb(var(--text-primary) / 0.08) 0%, transparent 60%)',
-              width: '100%',
-              height: '100%',
-              borderRadius: 18,
-            }}
-          />
-        </motion.div>
-      </motion.div>
-
-      {/* Glow beneath */}
-      <motion.div
-        className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-4/5 h-8 pointer-events-none"
-        animate={{ opacity: hovered ? 0.5 : 0.25 }}
-        style={{
-          background: 'radial-gradient(ellipse, rgba(99,179,237,0.5) 0%, transparent 70%)',
-          filter: 'blur(10px)',
-        }}
-      />
-
-      {/* Name badge */}
-      <motion.div
-        className="absolute -bottom-5 left-1/2 -translate-x-1/2 whitespace-nowrap glass-card px-4 py-1.5 z-20"
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4 }}
-      >
-        <span className="font-syne font-bold text-sm text-text-primary">Meet Barot</span>
-        <span className="font-mono text-xs ml-2" style={{ color: 'rgb(99,179,237)' }}>· AI / ML</span>
-      </motion.div>
-    </div>
-  )
-}
 
 // ─── Timeline item ──────────────────────────────────────────────
 function TimelineItem({ item, index }) {
@@ -624,78 +531,46 @@ function CodingStatsPanel() {
 // ─── Social Links ───────────────────────────────────────────────
 function SocialLinksRow() {
   return (
-    <div className="flex items-center gap-3 mt-6">
+    <div className="flex flex-wrap items-center gap-4 mt-6">
       {SOCIALS.map((social) => {
         const Icon = social.icon
         return (
           <motion.a
             key={social.label}
             href={social.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group relative w-11 h-11 rounded-full flex items-center justify-center"
-            style={{
-              background: 'var(--surface)',
-              border: '1px solid var(--surface-border)',
-            }}
-            whileHover={{
-              scale: 1.15,
-              borderColor: `${social.color}60`,
-              boxShadow: `0 0 20px ${social.color}25`,
-            }}
-            whileTap={{ scale: 0.92 }}
+            target={social.label === 'Email' ? undefined : "_blank"}
+            rel={social.label === 'Email' ? undefined : "noopener noreferrer"}
+            className="group relative flex flex-col items-center gap-2"
             title={social.label}
           >
-            <Icon size={18} className="text-text-secondary group-hover:text-text-primary transition-colors duration-200" />
+            <motion.div
+              className="w-12 h-12 rounded-xl flex items-center justify-center relative overflow-hidden"
+              style={{
+                background: 'rgba(255, 255, 255, 0.03)',
+                border: '1px solid rgba(255, 255, 255, 0.08)',
+                backdropFilter: 'blur(10px)',
+              }}
+              whileHover={{
+                scale: 1.05,
+                borderColor: `${social.color}50`,
+                boxShadow: `0 8px 24px -8px ${social.color}40, inset 0 0 20px -10px ${social.color}20`,
+              }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <div 
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{
+                  background: `radial-gradient(circle at 50% 0%, ${social.color}20 0%, transparent 70%)`
+                }}
+              />
+              <Icon size={20} className="text-text-secondary group-hover:text-white transition-colors duration-300 relative z-10" />
+            </motion.div>
+            <span className="font-mono text-[10px] uppercase tracking-wider text-text-muted group-hover:text-text-secondary transition-colors">
+              {social.label}
+            </span>
           </motion.a>
         )
       })}
-    </div>
-  )
-}
-
-// ─── Resume Section ─────────────────────────────────────────────
-function ResumeButtons() {
-  return (
-    <div className="flex flex-wrap items-center gap-3 mt-6">
-      <motion.a
-        href="/resume.pdf"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-manrope font-semibold text-sm"
-        style={{
-          background: 'rgba(99,179,237,0.12)',
-          border: '1px solid rgba(99,179,237,0.25)',
-          color: 'rgb(99,179,237)',
-        }}
-        whileHover={{
-          scale: 1.04,
-          boxShadow: '0 0 24px rgba(99,179,237,0.2)',
-          borderColor: 'rgba(99,179,237,0.45)',
-        }}
-        whileTap={{ scale: 0.96 }}
-      >
-        <Eye size={16} />
-        View Resume
-      </motion.a>
-      <motion.a
-        href="/resume.pdf"
-        download="Meet_Barot_Resume.pdf"
-        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-manrope font-semibold text-sm"
-        style={{
-          background: 'var(--surface)',
-          border: '1px solid var(--surface-border)',
-          color: 'rgb(var(--text-secondary))',
-        }}
-        whileHover={{
-          scale: 1.04,
-          borderColor: 'rgb(var(--text-primary) / 0.2)',
-        }}
-        whileTap={{ scale: 0.96 }}
-      >
-        <Download size={16} />
-        Download Resume
-      </motion.a>
     </div>
   )
 }
@@ -722,16 +597,27 @@ export default function About() {
         {/* ── TOP: Photo + Bio + Stats ── */}
         <div className="grid lg:grid-cols-2 gap-7 sm:gap-10 lg:gap-12 items-start mb-12">
 
-          {/* Left: Photo + recruiter highlights */}
+          {/* Left: Introduction + recruiter highlights */}
           <ScrollReveal variant="fade-left">
-            <div className="flex flex-col items-center lg:items-start gap-6 sm:gap-10">
+            <div className="flex flex-col items-start gap-6 sm:gap-10">
 
-              {/* Photo */}
-              <PhotoCard />
+              {/* Typography Introduction */}
+              <div className="flex flex-col gap-3">
+                <span className="font-mono text-[11px] sm:text-xs tracking-widest uppercase text-text-muted">
+                  ENGINEER &times; LEARNER &times; BUILDER
+                </span>
+                <h2 className="font-syne font-bold text-[2.75rem] sm:text-6xl lg:text-[4rem] text-text-primary leading-[1.1] tracking-tight">
+                  Turning Ideas<br />
+                  into <span className="gradient-text-cyan">Impact</span>
+                </h2>
+                <p className="font-manrope text-text-secondary text-[15px] sm:text-[17px] leading-relaxed max-w-[420px] mt-2">
+                  I love building solutions that solve real-world problems, exploring new technologies, and creating a better tomorrow with AI.
+                </p>
+              </div>
 
               {/* Availability badge */}
               <motion.div
-                className="flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-mono font-medium mt-4 sm:mt-6"
+                className="flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-mono font-medium mt-1 sm:mt-2"
                 style={{
                   background: 'rgba(52,211,153,0.08)',
                   border: '1px solid rgba(52,211,153,0.25)',
@@ -745,17 +631,17 @@ export default function About() {
               </motion.div>
 
               {/* Location + Status */}
-              <div className="flex flex-col gap-2 text-sm text-text-secondary font-manrope">
-                <div className="flex items-center gap-2">
-                  <MapPin size={14} style={{ color: 'rgb(99,179,237)' }} />
+              <div className="flex flex-col gap-3 text-sm sm:text-base text-text-secondary font-manrope">
+                <div className="flex items-center gap-3">
+                  <MapPin size={16} style={{ color: 'rgb(99,179,237)' }} />
                   <span>Vadodara, Gujarat, India</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Calendar size={14} style={{ color: 'rgb(167,139,250)' }} />
+                <div className="flex items-center gap-3">
+                  <Calendar size={16} style={{ color: 'rgb(167,139,250)' }} />
                   <span>B.Tech CSE — 2023–2027 (3rd Year)</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Award size={14} style={{ color: 'rgb(52,211,153)' }} />
+                <div className="flex items-center gap-3">
+                  <Award size={16} style={{ color: 'rgb(52,211,153)' }} />
                   <span>CGPA 9.17 / 10 · Dean's List</span>
                 </div>
               </div>
@@ -799,19 +685,12 @@ export default function About() {
 
             {/* Socials */}
             <ScrollReveal variant="fade-right" delay={0.2}>
-              <div className="mt-6">
-                <div className="flex items-center gap-2 mb-3">
-                  <ExternalLink size={14} style={{ color: 'rgb(167,139,250)' }} />
+              <div className="mt-8">
+                <div className="flex items-center gap-2 mb-4">
+                  <ExternalLink size={16} style={{ color: 'rgb(167,139,250)' }} />
                   <span className="font-mono text-xs tracking-widest uppercase text-text-muted">Connect With Me</span>
                 </div>
                 <SocialLinksRow />
-              </div>
-            </ScrollReveal>
-
-            {/* Resume */}
-            <ScrollReveal variant="fade-right" delay={0.3}>
-              <div className="mt-4">
-                <ResumeButtons />
               </div>
             </ScrollReveal>
           </div>
