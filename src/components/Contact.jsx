@@ -23,8 +23,8 @@ const SOCIALS = [
   {
     icon: Linkedin,
     label: 'LinkedIn',
-    value: 'linkedin.com/in/meetbarot',
-    href: 'https://www.linkedin.com/in/meetbarot',
+    value: 'linkedin.com/in/meet-barot-7b03862bb',
+    href: 'https://www.linkedin.com/in/meet-barot-7b03862bb/',
     color: '#0a66c2',
   },
   {

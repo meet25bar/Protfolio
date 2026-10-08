@@ -254,7 +254,7 @@ export default function Hero() {
         <motion.div variants={itemVariants} className="flex items-center justify-center gap-3 sm:gap-4 mb-6 sm:mb-10">
           {[
             { icon: Github,   href: 'https://github.com/meet25bar',     label: 'GitHub'   },
-            { icon: Linkedin, href: 'https://linkedin.com/in/meetbarot', label: 'LinkedIn' },
+            { icon: Linkedin, href: 'https://www.linkedin.com/in/meet-barot-7b03862bb/', label: 'LinkedIn' },
             { icon: Mail,     href: 'mailto:barotmeet25@gmail.com',      label: 'Email'    },
           ].map(({ icon: Icon, href, label }) => (
             <motion.a

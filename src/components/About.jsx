@@ -63,7 +63,7 @@ const STATS = [
 // ─── Social Links ──────────────────────────────────────────────
 const SOCIALS = [
   { icon: Github,    label: 'GitHub',    url: 'https://github.com/meet25bar', color: '#fff' },
-  { icon: Linkedin,  label: 'LinkedIn',  url: 'https://www.linkedin.com/in/meetbarot', color: '#0A66C2' },
+  { icon: Linkedin,  label: 'LinkedIn',  url: 'https://www.linkedin.com/in/meet-barot-7b03862bb/', color: '#0A66C2' },
   { icon: Mail,      label: 'Email',     url: 'mailto:barotmeet25@gmail.com', color: '#EA4335' },
   { icon: FileText,  label: 'Resume',    url: '/resume.pdf', color: '#34D399' },
   { icon: XIcon,     label: 'X',         url: 'https://x.com/BarotMeet23562', color: '#fff' },
