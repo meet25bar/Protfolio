@@ -589,7 +589,7 @@ export default function About() {
 
       <div className="section-container relative z-10">
         <SectionHeader
-          label="Who I Am"
+          label="Who Am I"
           title="About Me"
           subtitle="A passionate builder at the intersection of engineering and intelligence."
         />
