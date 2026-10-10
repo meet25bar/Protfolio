@@ -97,13 +97,13 @@ const CERTS = [
     tags: ['AI Fundamentals', 'OCI', 'Machine Learning'],
   },
   {
-    title: 'FastAPI – The Complete Course',
+    title: 'FastAPI – The Complete Course 2026 (Beginner + Advanced)',
     issuer: 'Udemy',
-    date: 'Coming Soon',
+    date: 'Oct 2026',
     color: '#0ea5e9',
     icon: '⚡',
     id: 'fastapi',
-    credential: '#',
+    credential: '/certs/fastapi.pdf',
     tags: ['FastAPI', 'Python', 'APIs', 'Web Development'],
   },
 ]
